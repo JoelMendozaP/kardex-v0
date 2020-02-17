@@ -1,0 +1,200 @@
+<style>
+	@font-face {
+		font-family: 'code_boldregular';
+		src: url('code_bold-webfont.eot');
+		src: url('code_bold-webfont.eot?#iefix') format('embedded-opentype'),
+			url('code_bold-webfont.svg#code_boldregular') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	* {
+		font-family: 'code_boldregular';
+	}
+
+	body {
+		background-image: url(back.jpg);
+	}
+
+	#contReloj {
+		background: skyblue;
+		text-align: center;
+		color: blanchedalmond;
+		font-size: 20px;
+		width: 300px;
+		height: 55px;
+		display: inline-block;
+		font-family: 'code_boldregular';
+	}
+</style>
+
+
+
+
+<header class="main-header">
+	<!--=====================================
+	LOGOTIPO
+	======================================-->
+	<a href="inicio" class="logo">
+
+		<!-- logo mini -->
+		<span class="logo-mini">
+
+			<img src="vistas/img/plantilla/normal.jpg" class="img-responsive" style="padding:5px">
+
+		</span>
+
+		<!-- logo normal -->
+
+		<span class="logo-lg">
+
+			<img src="vistas/img/plantilla/logo.jpg" class="img-responsive" style="padding:3px 0px">
+
+		</span>
+
+	</a>
+
+	<!--=====================================
+	BARRA DE NAVEGACIÓN
+	======================================-->
+	<nav class="navbar navbar-static-top" role="navigation">
+
+		<!-- Botón de navegación -->
+
+		<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+
+		</a>
+		<section id="contReloj"> <a id="pHoras"> </a> :<a id="pMinutos"> </a> :<a id="pSegundos"> </a> <a id="contSaludo"> </a>
+			<br>
+			<section > <a id="dia">   </a> / <a id="mes"> </a> /<a id="anio"> </a>  </section>
+		</section>
+
+		<script type="text/javascript">
+			function ActualizarHora() {
+				var fecha = new Date();
+				var segundos = fecha.getSeconds();
+				var minutos = fecha.getMinutes();
+				var horas = fecha.getHours();
+
+				var hoy = new Date();
+				var dd = hoy.getDate();
+				var mm = hoy.getMonth() + 1;
+				var yyyy = hoy.getFullYear();
+
+			
+				var elementoHoras = document.getElementById("pHoras");
+				var elementoMinutos = document.getElementById("pMinutos");
+				var elementoSegundos = document.getElementById("pSegundos");
+				var pSaludo = document.getElementById("contSaludo");
+
+				elementoHoras.textContent = horas;
+				elementoMinutos.textContent = minutos;
+				elementoSegundos.textContent = segundos;
+				
+
+				if (horas >= 8 && minutos >= 1 && horas < 12) {
+					pSaludo.textContent = "Buenos Días";
+				}
+				if (horas >= 12 && minutos >= 1 && horas < 19) {
+					pSaludo.textContent = "Buenas Tardes";
+				}
+				if (horas >= 19 && minutos >= 1) {
+					pSaludo.textContent = "Buenas Noches";
+				}
+				
+
+
+				if (dd < 10) {
+					dd = '0' + dd;
+				}
+
+				if (mm < 10) {
+					mm = '0'+mm;
+				}
+				
+				
+				var elementoanio= document.getElementById("anio");
+				var elementomes= document.getElementById("mes");
+				var elementodia = document.getElementById("dia");
+
+				elementoanio.textContent =yyyy;
+				elementomes.textContent = mm;
+				elementodia.textContent = dd;
+				
+
+
+				
+			}
+
+			setInterval(ActualizarHora, 1000);
+
+					
+function addZero(i) {
+    if (i < 10) {
+        i = '0' + i;
+    }
+    return i;
+}
+		</script>
+		<!-- perfil de usuario -->
+
+		<div class="navbar-custom-menu">
+
+			<ul class="nav navbar-nav">
+
+				<li class="dropdown user user-menu">
+
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+<?php
+  
+   if($_SESSION["foto"] != ""){
+
+	   echo '<img src="'.$_SESSION["foto"].'" class="user-image">';
+
+   }else{
+	   echo '<img src="vistas/img/usuarios/default/usn.png" class="user-image">';
+
+   }
+?>				
+
+		<span class="hidden-xs"><?php
+
+		$nombre =$_SESSION["nombre"]." - ".$_SESSION["ap_paterno"].' - '.$_SESSION["ap_materno"];
+		
+		
+		          echo   $nombre;
+					
+						
+						 ?>
+						
+					</span>
+
+					</a>
+
+					<!-- Dropdown-toggle -->
+
+					<ul class="dropdown-menu">
+
+						<li class="user-body">
+
+							<div class="pull-right">
+
+								<a href="salir" class="btn btn-default btn-flat">Salir</a>
+
+							</div>
+
+						</li>
+
+					</ul>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+	</nav>
+
+
+</header>
