@@ -26,6 +26,31 @@
 		display: inline-block;
 		font-family: 'code_boldregular';
 	}
+
+	#sle{ border: 1px solid #999;
+    border-radius: 0.4em;
+    padding: 0 1em;
+    margin: 0 1em 1em 1em; display: table;
+    width: 50%;
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+    background: #bbe1fa;
+    color:#1b262c;
+	}
+	.icono-nosotros {
+display: flex;
+   justify-content: space-between;
+}
 </style>
 
 

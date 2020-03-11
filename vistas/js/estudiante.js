@@ -99,3 +99,33 @@ $(".btnagregarestudiante").click(function(){
 		}
 	});
 })
+
+/*=============================================
+BOLETA DEL ESTUDIANTE
+=============================================*/
+
+$(".btnboletaestudiante").click(function(){
+	
+  var idestudiantito = $(this).attr("idestudiantito");
+  var reg_univ = $(this).attr("reg_univ");
+  
+  swal({
+    title: '¿Desea ver el Historial Academico?',
+    text: "¡Si no lo está puede cancelar la accíón!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, Ver Hitorial!'
+  }).then((result)=>{
+
+    if(result.value){
+                                                                  
+      window.location = "index.php?ruta=boleta&idestudiantito="+idestudiantito+"&reg_univ="+reg_univ;
+
+    }
+
+  })
+
+})

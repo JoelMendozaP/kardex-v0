@@ -31,6 +31,11 @@ session_start();
 
   <!-- Theme style -->
   <link rel="stylesheet" href="vistas/dist/css/AdminLTE.css">
+  <!-- Styles  only -->
+  
+
+  <link rel="stylesheet" href="vistas/dist/css/stilos.css">
+
   
   <!-- AdminLTE Skins -->
   <link rel="stylesheet" href="vistas/dist/css/skins/_all-skins.min.css">
@@ -99,6 +104,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "docentes" ||
          $_GET["ruta"] == "estudiantes" ||
          $_GET["ruta"] == "inscribir" ||
+         $_GET["ruta"] == "boleta" ||
          $_GET["ruta"] == "salir"){
         include "modulos/".$_GET["ruta"].".php";
       }else{
@@ -121,6 +127,8 @@ CUERPO DOCUMENTO
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/materia.js"></script>
 <script src="vistas/js/estudiante.js"></script>
+<script src="vistas/js/boleta.js"></script>
+
 
 
 </body>

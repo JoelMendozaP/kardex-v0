@@ -92,8 +92,25 @@ class ControladorEstudiantes
         $respuesta = ModeloEstudiantes::MdlMostrarestudiante($tabla, $item, $valor);
         return $respuesta;
     }
+      /*=============================================
+	MOSTRAR BOLETA
+	=============================================*/
+    static public function ctrMostrarboleta($item, $valor,$id)
+    {
+        $tabla = "estudiante";
+        $tabla1 = "materia";
+        $respuesta = ModeloEstudiantes::mdlMostrarboleta($tabla,$tabla1, $item, $valor,$id);
+        return $respuesta;
+    }
 
 
+    static public function ctrMostrarlista($item, $valor,$id)
+    {
+        $tabla = "estudiante";
+        $tabla1 = "materia";
+        $respuesta = ModeloEstudiantes::mdlMostrarlista($tabla,$tabla1, $item, $valor,$id);
+        return $respuesta;
+    }
     /*=============================================
 	EDITAR ESTUDIANTE
 	=============================================*/
@@ -210,6 +227,10 @@ class ControladorEstudiantes
 			}		
 		}
 	}
+
+  /*=============================================
+      INSCRIBIR ESTUDIANTE
+	=============================================*/
 
     public static function CtrInscribir()
     {

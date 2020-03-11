@@ -10,7 +10,6 @@ EDITAR ESTUDIANTE
 =============================================*/
 
 if(isset($_POST["idestudiante"])){
-    
 	$editar = new Ajaxestudiante();
 	$editar -> idestudiante = $_POST["idestudiante"];
 	$editar -> ajaxEditarestudiante();

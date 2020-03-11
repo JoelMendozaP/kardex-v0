@@ -123,12 +123,51 @@ static public function mdlinscrbirEstudiante($tabla, $datos)
 	$stmt->bindParam(":notaf2", $datos["notaf2"], PDO::PARAM_STR);
 	$stmt->bindParam(":notaf3", $datos["notaf3"], PDO::PARAM_STR);
 	
-	
 	if ($stmt->execute()) {return "ok";} else {return "error";}
 	$stmt->close();
 	$stmt = null;
 
 }
 	
+public static function mdlMostrarboleta($tabla , $tabla1 ,$item, $valor,$id)
+    {
+        // $tabla = "estudiante";
+        // $tabla1 = "materia";
+		// $tabla2 = "toma";
+              if($item != null) {
+               $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla , $tabla1  WHERE $item = :$item");
+               $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+              $stmt->execute();
+              return $stmt -> fetch();
+            }else{                                 
+                $stmt = Conexion::conectar()->prepare("SELECT * FROM toma t,materia m, estudiante e WHERE $id = t.codest and t.cod_mat = m.cod_mat and e.codest=$id");
+                $stmt->execute();
+                return $stmt -> fetchAll();
+            }
+            $stmt->close();
+            $stmt = null;
+           
+	 }
+	 
+
+public static function mdlMostrarlista($tabla , $tabla1 ,$item, $valor,$id)
+{
+	// $tabla = "estudiante";
+	// $tabla1 = "materia";
+	// $tabla2 = "toma";
+		  if($item != null) {
+		   $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla , $tabla1  WHERE $item = :$item");
+		   $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+		  $stmt->execute();
+		  return $stmt -> fetch();
+		}else{                                 
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM estudiante e,toma t, materia m WHERE $id= m.cod_mat and e.codest = t.codest and t.cod_mat=$id");
+			$stmt->execute();
+			return $stmt -> fetchAll();
+		}
+		$stmt->close();
+		$stmt = null;
+	   
+ }
 
 }

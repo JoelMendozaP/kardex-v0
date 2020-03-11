@@ -67,10 +67,9 @@
       <td>' . $value["docente"] . '</td>
       <td>
           <div class="btn-group">
-          
         <button class="btn btn-warning btnEditarmateria" idmateria="' . $value["cod_mat"] . '" data-toggle="modal" data-target="#ModalEditarmateria"> <i class="fa fa-pencil"></i></button>
         <button class="btn btn-danger  btnEliminarmateria" materia="' . $value["nombre_m"] . '"  idmateria="' . $value["cod_mat"] . '" > <i class="fa fa-times"></i></button>
-        <a class="btn btn-info" href="inscribir" materia="' . $value["nombre_m"] . '"  idmateria="' . $value["cod_mat"] . '">	<i class="fa fa-plus-square"><span> Lista</span></i></a>
+        <button class="btn btn-info btnlistademateria" href="inscribir" idmaterias="'.$value["cod_mat"].'"  materia="'.$value["nombre_m"].'"> <i class="fa fa-plus-square"><span> Lista</span></i></button>
           
         
         </div>

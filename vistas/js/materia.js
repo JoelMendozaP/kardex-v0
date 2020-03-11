@@ -71,4 +71,35 @@ $(".btnEliminarmateria").click(function(){
     })
   
   })
+
+
+   /*=============================================
+   LISTA DE LA MATERIA
+=============================================*/
+
+$(".btnlistademateria").click(function(){
+	
+  var idmaterias = $(this).attr("idmaterias");
+  var materia = $(this).attr("materia");
+  
+  swal({
+    title: '¿Desea ver la Lista de Inscritos?',
+    text: "¡Si no lo está puede cancelar la accíón!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, Ver La Lista!'
+  }).then((result)=>{
+
+    if(result.value){
+                                                                  
+      window.location = "index.php?ruta=inscribir&idmaterias="+idmaterias+"&materia="+materia;
+
+    }
+
+  })
+
+})
   

@@ -58,7 +58,6 @@
             $aux = null;
             $usu = ControladorEstudiantes::ctrMostrarestudiante($item, $valor);
             foreach ($usu as $key => $value) {
-
               echo '<tr>
           <td>' . ($key + 1) . '</td>
           <td>' . $value["ci"] . '</td>
@@ -79,7 +78,9 @@
                 <button class="btn btn-warning btnEditarestudiante" idestudiante="' . $value["codest"] . '" data-toggle="modal" data-target="#ModalEditarestudiante"> <i class="fa fa-pencil"></i></button>
                 <button class="btn btn-danger  btnEliminarestudiante" reg_univ="' . $value["reg_univ"] . '"  idestudiante="' . $value["codest"] . '"> <i class="fa fa-times"></i></button>
                 <button class="btn btn-success btnagregarestudiante" idestudiantes="' . $value["codest"] . '" data-toggle="modal" data-target="#Modalagregarrestudiante"> <i class="fa fa-plus-square"></i></button>
-                <a class="btn btn-info" href="boleta" estudiante="' . $value["reg_univ"] . '"  idestudiante="' . $value["codest"] . '">	<i class="fa fa-folder-open"></i></a>
+                <button class="btn btn-info btnboletaestudiante" href="boleta" reg_univ="' . $value["reg_univ"] . '"  idestudiantito="' . $value["codest"] . '"> <i class="fa fa-folder-open"></i></button>
+                                                                                                                     
+               
 
                   </div>
 
