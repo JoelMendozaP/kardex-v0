@@ -23,6 +23,8 @@
         <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAgregarEstudiante">
           Agregar Estudiante
         </button>
+
+
         <br>
       </div>
 
@@ -79,9 +81,6 @@
                 <button class="btn btn-danger  btnEliminarestudiante" reg_univ="' . $value["reg_univ"] . '"  idestudiante="' . $value["codest"] . '"> <i class="fa fa-times"></i></button>
                 <button class="btn btn-success btnagregarestudiante" idestudiantes="' . $value["codest"] . '" data-toggle="modal" data-target="#Modalagregarrestudiante"> <i class="fa fa-plus-square"></i></button>
                 <button class="btn btn-info btnboletaestudiante" href="boleta" reg_univ="' . $value["reg_univ"] . '"  idestudiantito="' . $value["codest"] . '"> <i class="fa fa-folder-open"></i></button>
-                                                                                                                     
-               
-
                   </div>
 
           </td>
@@ -249,7 +248,6 @@
                 <span class="input-group-addon"><i class="fa  fa-qq"> </i></span>
                 <input type="date" class=" form-control input-lg" name="nacimiento" data-datepicker-color="primary">
 
-
               </div>
             </div>
           </div>
@@ -258,9 +256,7 @@
         <div class="modal-footer">
           <button type="button" class="btn 
                       btn-outline pull-left" data-dismiss="modal">Salir</button>
-
           <button type="submit" class="btn btn-outline">Guardar estudiante</button>
-
         </div>
         <?php
         $crearmateria = new ControladorEstudiantes();
@@ -407,7 +403,7 @@
                 <input type="date" class=" form-control input-lg" name="editarnacimiento" id="editarnacimiento" data-datepicker-color="primary">
               </div>
             </div>
-           
+
 
           </div>
         </div>
@@ -459,6 +455,10 @@ $borrarestudiante->ctrBorrarestudiante();
 
           <div class="box-body">
 
+
+
+          <input type="hidden" id="idest" name ="idest" value="">
+
             <!-- escojer materia-->
             <div class="form-group">
               <div class="input-group">
@@ -473,7 +473,7 @@ $borrarestudiante->ctrBorrarestudiante();
 
                   while ($row = $resultado->fetch_assoc()) {
                   ?>
-                    <option value="<?php echo $row['cod_mat']; ?>"><?php echo $row['cod_mat'] . " " . $row['nombre_m'] . " " . $row['gestion'] . " " . $row['docente']; ?> </option>
+                    <option value="<?php echo $row['cod_mat']; ?>"><?php echo $row['cod_mat'] . "   " . $row['nombre_m'] . "   " . $row['gestion'] . "   " . $row['docente']; ?> </option>
 
                   <?php
                   } ?>
@@ -493,29 +493,31 @@ $borrarestudiante->ctrBorrarestudiante();
                 </p>
               </div>
             </div>
-            <!-- Nota final  -->
-            <div class="form-group">
-              <div class="input-group">
-                <p>
-                  <i class="fa fa-commenting">
 
-                    <input type="text" class="input-lg" style="color: black" placeholder="Nota Final" name="notaf" id="notaf" size="20">
-                  </i>
-                </p>
-              </div>
-            </div>
-            <input type="hidden" id="idest" name="idest">
-            <!-- OBSERVACION-->
+                      <!-- Nota final  -->
             <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
-                <select class="form-control input-lg" name="observacion">
-                  <option value="Observacion">Observacion</option>
-                  <option value="Aprobado">Aprobado</option>
-                  <option value="Reprobado">Reprobado</option>
-                  <option value="Abandono">Abandono</option>
-                </select>
-              </div>
+              <p>
+                <i class="fa fa-commenting">
+                  <!-- <input type="text" class="input-lg" style="color: black" placeholder="Nota Final" name="notaf" id="notaf" size="20"> -->
+                  <span class="input-lg" style="color: black" name="notaf" id="notaf" size="20">0</span>
+                  <input type="hidden" id="notafinal" name ="notafinal">
+                </i>  
+              </p>
+
+            </div>
+           
+            <!-- OBSERVACION-->
+
+            <div class="form-group">
+
+              <p>
+                <i class="fa fa-commenting">
+                  <!-- <input type="text" class="input-lg" style="color: black" placeholder="Nota Final" name="notaf" id="notaf" size="20"> -->
+                  <span class="input-lg" style="color: black" name="observacion" id="observacion" size="20"></span>
+                  <input type="hidden" id="observaciones" name = "observaciones" value="">
+                </i>
+              </p>
+
             </div>
 
 

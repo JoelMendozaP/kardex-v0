@@ -24,6 +24,27 @@ class ModeloEstudiantes{
 			$stmt->close();
 			$stmt = null;
 	}
+
+	
+	
+	static public function MdlMostrarestudiantes($tabla,$item,$item1,$item2, $valor, $valor1, $valor2){
+		
+		if($item != null && $item1 != null && $item2 != null) {
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item and $item1 = :$item1 and $item2 = :$item2");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt -> fetch();
+			}else{
+	
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ");
+				$stmt->execute();
+				return $stmt -> fetchAll();
+			}
+			$stmt->close();
+			$stmt = null;
+	}
 /*=============================================
 	INGRESAR ESTUDIANTES
 =============================================*/

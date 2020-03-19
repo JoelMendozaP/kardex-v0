@@ -85,13 +85,26 @@ class ControladorEstudiantes
             }
         }
     }
-    /*MOSTRAR ESTUDIANTE */
+     /*=============================================
+	MOSTRAR ESTUDIANTE
+	=============================================*/
     static public function ctrMostrarestudiante($item, $valor)
     {
         $tabla = "estudiante";
         $respuesta = ModeloEstudiantes::MdlMostrarestudiante($tabla, $item, $valor);
         return $respuesta;
     }
+ /*=============================================
+	VERIFICAR SI EXISTE ESTUDIANTE
+	=============================================*/
+    
+    static public function ctrMostrarestudiantes($item,$item1,$item2, $valor, $valor1, $valor2)
+    {
+        $tabla = "estudiante";
+        $respuesta = ModeloEstudiantes::MdlMostrarestudiantes($tabla,$item,$item1,$item2, $valor, $valor1, $valor2);
+        return $respuesta;
+    }
+
       /*=============================================
 	MOSTRAR BOLETA
 	=============================================*/
@@ -234,19 +247,26 @@ class ControladorEstudiantes
 
     public static function CtrInscribir()
     {
-
+        echo "<script>";
+        echo "alert('";
+        echo  $_POST["observaciones"]."primera";
+        echo "')</script>";
         if (isset($_POST["idest"])) {
+            echo "<script>";
+        echo "alert('";
+        echo  $_POST["notafinal"]."segunda ";
+        echo "')</script>";
             if (preg_match('/^[0-9 ]+$/', $_POST["nota1"]) &&
                 preg_match('/^[0-9 ]+$/', $_POST["nota2"]) &&
-                preg_match('/^[0-9 ]+$/', $_POST["nota3"]) 
+                preg_match('/^[0-9 ]+$/', $_POST["nota3"]) &&
+                preg_match('/^[0-9 ]+$/', $_POST["notafinal"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóú-ÁÉÍÓÚ ]+$/', $_POST["observaciones"]) 
             ) {
-
-              
                 $tabla = "toma";
                
                 echo "<script>";
                 echo "alert('";
-                
+                echo  $_POST["nota3"]."tercera ";
                 echo "')</script>";
                
                 $datos = array(
@@ -255,8 +275,8 @@ class ControladorEstudiantes
                     "notaf1" => $_POST["nota1"],
                     "notaf2" => $_POST["nota2"],
                     "notaf3" => $_POST["nota3"],
-                    "observacion" => $_POST["observacion"],
-                    "notafinal" => $_POST["notaf"],
+                    "observacion" => $_POST["observaciones"],
+                    "notafinal" => $_POST["notafinal"],
                 );
                 $respuesta = ModeloEstudiantes::mdlinscrbirEstudiante($tabla, $datos);
                 

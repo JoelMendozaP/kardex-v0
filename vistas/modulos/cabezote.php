@@ -27,30 +27,33 @@
 		font-family: 'code_boldregular';
 	}
 
-	#sle{ border: 1px solid #999;
-    border-radius: 0.4em;
-    padding: 0 1em;
-    margin: 0 1em 1em 1em; display: table;
-    width: 50%;
-    display: block;
-    margin-inline-start: 2px;
-    margin-inline-end: 2px;
-    padding-block-start: 0.35em;
-    padding-inline-start: 0.75em;
-    padding-inline-end: 0.75em;
-    padding-block-end: 0.625em;
-    min-inline-size: min-content;
-    border-width: 2px;
-    border-style: groove;
-    border-color: threedface;
-    border-image: initial;
-    background: #bbe1fa;
-    color:#1b262c;
+	#sle {
+		border: 1px solid #999;
+		border-radius: 0.4em;
+		padding: 0 1em;
+		margin: 0 1em 1em 1em;
+		display: table;
+		width: 50%;
+		display: block;
+		margin-inline-start: 2px;
+		margin-inline-end: 2px;
+		padding-block-start: 0.35em;
+		padding-inline-start: 0.75em;
+		padding-inline-end: 0.75em;
+		padding-block-end: 0.625em;
+		min-inline-size: min-content;
+		border-width: 2px;
+		border-style: groove;
+		border-color: threedface;
+		border-image: initial;
+		background: #bbe1fa;
+		color: #1b262c;
 	}
+
 	.icono-nosotros {
-display: flex;
-   justify-content: space-between;
-}
+		display: flex;
+		justify-content: space-between;
+	}
 </style>
 
 
@@ -91,8 +94,14 @@ display: flex;
 		</a>
 		<section id="contReloj"> <a id="pHoras"> </a> :<a id="pMinutos"> </a> :<a id="pSegundos"> </a> <a id="contSaludo"> </a>
 			<br>
-			<section > <a id="dia">   </a> / <a id="mes"> </a> /<a id="anio"> </a>  </section>
+			<section> <a id="dia"> </a> / <a id="mes"> </a> /<a id="anio"> </a> </section>
 		</section>
+		
+
+
+
+
+
 
 		<script type="text/javascript">
 			function ActualizarHora() {
@@ -106,7 +115,7 @@ display: flex;
 				var mm = hoy.getMonth() + 1;
 				var yyyy = hoy.getFullYear();
 
-			
+
 				var elementoHoras = document.getElementById("pHoras");
 				var elementoMinutos = document.getElementById("pMinutos");
 				var elementoSegundos = document.getElementById("pSegundos");
@@ -115,7 +124,7 @@ display: flex;
 				elementoHoras.textContent = horas;
 				elementoMinutos.textContent = minutos;
 				elementoSegundos.textContent = segundos;
-				
+
 
 				if (horas >= 8 && minutos >= 1 && horas < 12) {
 					pSaludo.textContent = "Buenos Días";
@@ -126,7 +135,7 @@ display: flex;
 				if (horas >= 19 && minutos >= 1) {
 					pSaludo.textContent = "Buenas Noches";
 				}
-				
+
 
 
 				if (dd < 10) {
@@ -134,32 +143,32 @@ display: flex;
 				}
 
 				if (mm < 10) {
-					mm = '0'+mm;
+					mm = '0' + mm;
 				}
-				
-				
-				var elementoanio= document.getElementById("anio");
-				var elementomes= document.getElementById("mes");
+
+
+				var elementoanio = document.getElementById("anio");
+				var elementomes = document.getElementById("mes");
 				var elementodia = document.getElementById("dia");
 
-				elementoanio.textContent =yyyy;
+				elementoanio.textContent = yyyy;
 				elementomes.textContent = mm;
 				elementodia.textContent = dd;
-				
 
 
-				
+
+
 			}
 
 			setInterval(ActualizarHora, 1000);
 
-					
-function addZero(i) {
-    if (i < 10) {
-        i = '0' + i;
-    }
-    return i;
-}
+
+			function addZero(i) {
+				if (i < 10) {
+					i = '0' + i;
+				}
+				return i;
+			}
 		</script>
 		<!-- perfil de usuario -->
 
@@ -171,29 +180,27 @@ function addZero(i) {
 
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-<?php
-  
-   if($_SESSION["foto"] != ""){
+						<?php
 
-	   echo '<img src="'.$_SESSION["foto"].'" class="user-image">';
+						if ($_SESSION["foto"] != "") {
 
-   }else{
-	   echo '<img src="vistas/img/usuarios/default/usn.png" class="user-image">';
+							echo '<img src="' . $_SESSION["foto"] . '" class="user-image">';
+						} else {
+							echo '<img src="vistas/img/usuarios/default/usn.png" class="user-image">';
+						}
+						?>
 
-   }
-?>				
+						<span class="hidden-xs"><?php
 
-		<span class="hidden-xs"><?php
+												$nombre = $_SESSION["nombre"] . " - " . $_SESSION["ap_paterno"] . ' - ' . $_SESSION["ap_materno"];
 
-		$nombre =$_SESSION["nombre"]." - ".$_SESSION["ap_paterno"].' - '.$_SESSION["ap_materno"];
-		
-		
-		          echo   $nombre;
-					
-						
-						 ?>
-						
-					</span>
+
+												echo   $nombre;
+
+
+												?>
+
+						</span>
 
 					</a>
 
@@ -223,3 +230,4 @@ function addZero(i) {
 
 
 </header>
+

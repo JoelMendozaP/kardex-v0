@@ -53,4 +53,29 @@ class Ajaxestudiante{
 		echo json_encode($respuesta);
 
 	}
+
+
+	/*=============================================
+	VALIDAR NO REPETIR ESTUDIANTE POR CI
+	=============================================*/	
+	public $ValidarCi;
+	 public function ajaxValidarEstudiante(){
+		$item = "ci";
+		$valor = $this->ValidarCi;
+		$respuesta = ControladorEstudiantes::ctrMostrarestudiante($item, $valor);
+		echo json_encode($respuesta);
+	}
 }
+
+/*=============================================
+	VALIDAR NO REPETIR ESTUDIANTE
+	=============================================*/	
+if(isset($_POST["ValidarCi"])){
+	$Agregar = new Ajaxestudiante();
+	$Agregar -> ValidarCi= $_POST["ValidarCi"];
+	$Agregar -> ajaxValidarEstudiante();
+}
+
+
+
+

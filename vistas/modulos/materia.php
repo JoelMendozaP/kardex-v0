@@ -23,6 +23,10 @@
         <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAgregarmateria">
           Agregar Materias
         </button>
+
+        <div class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalpdfmateria">
+          <i class="fa fa-print"> GENERAR PDF DE LISTA</i>
+        </div>
         <br>
       </div>
 
@@ -81,14 +85,6 @@
 
           </tbody>
         </table>
-       
-
-
-
-        
-
-
-
       </div>
       <!-- /.box-footer-->
     </div>
@@ -96,6 +92,40 @@
   </section>
   <!-- /.content -->
 </div>
+
+
+<!-- CLASE MODAL GENERAR PDF LISTA DE MATERIAS -->  
+
+<div class="modal fade bd-example-modal-lg  modal-success tabindex="-1" id="modalpdfmateria" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <form role="form" method="POST" enctype="multipart/form-data">
+    <!-- cabeza del modal-->
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">GENERAR PDF DE LISTA</h4>
+    </div>
+    <!-- cuerpo del modal -->
+    <div class="modal-body">
+      <div class="box-body">
+        
+         <iframe src=<?php echo "http://localhost/sistema/vistas/modulos/listamateria.php?"?> height="1200" width="100%"  ></iframe> 
+    </div>
+    </div>
+    <!-- /.pie del modal-->
+    <div class="modal-footer">
+      <div type="button" class="btn  btn-outline pull-right" data-dismiss="modal">CANCELAR</div>
+    </div>
+     </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 <!-- CLASE MODAL AGREGAR MATERIA-->
 <div class="modal modal-info fade" id="modalAgregarmateria" role="dialog">
@@ -186,10 +216,12 @@
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar-check-o"> </i></span>
                 <select class="form-control input-lg" name="nuevaestapa">
-                  <option value=" Seleccionar una Temporada ">Seleccionar una temporada</option>
-                  <option value=" Primera">Primera</option>
-                  <option value=" Segunda">Segunda</option>
-                  <option value=" Curso de Temporada">Curso de Temporada</option>
+                  <option value="Seleccionar una Temporada ">Seleccionar una temporada</option>
+                  <option value="Primera">Primera</option>
+                  <option value="Segunda">Segunda</option>
+                  <option value="Tercer">Tercer</option>
+                  <option value="Cuarta">Cuarta</option>
+                  <option value="Curso de Temporada">Curso de Temporada</option>
                 </select>
               </div>
             </div>

@@ -186,17 +186,8 @@ foreach ($materia as $key => $value) {
       
 
       <div type="button" class="btn  btn-outline pull-right" data-dismiss="modal">CANCELAR</div>
-
-
     </div>
-    
-    <?php
-    $editarmateria = new Controladormaterias();
-    $editarmateria->Ctreditarmateria();
-    ?>
-  </form>
-
-      
+  </form>  
     </div>
   </div>
 </div>

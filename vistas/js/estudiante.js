@@ -129,3 +129,74 @@ $(".btnboletaestudiante").click(function(){
   })
 
 })
+
+/*=============================================
+REVISAR SI SE REPITE EL ESTUDIANTE REGISTRADO
+=============================================*/
+$("#Ci").change(function(){
+  
+   var Ci =$(this).val();
+  var datos = new FormData();
+  datos.append("ValidarCi",Ci);
+
+  $.ajax({
+
+  url:"ajax/estudiante.ajax.php",
+  method: "POST",
+  data: datos,
+  cache: false,
+  contentType: false,
+  processData: false,
+  dataType: "json",
+  success: function(respuesta){
+
+        $(".alert").remove();
+    if (respuesta) {
+      $("#Ci").parent().after('<div class="alert alert-danger">El Estudiante Ya existe</div>');
+      $("#Ci").val("");
+    } else {
+      
+    }
+    
+          
+  }
+
+});
+})
+
+
+/*=============================================
+ PROMEDIO DE NOTAS 
+=============================================*/
+$("#nota1"&&"#nota2"&&"#nota3").change(function(){
+
+  var nota1 = parseInt(document.getElementById("nota1").value);
+  var nota2 = parseInt(document.getElementById("nota2").value);
+  var nota3 = parseInt(document.getElementById("nota3").value);
+
+  notafinal=parseFloat((nota1+nota2+nota3)/3);
+  document.getElementById('notaf').innerHTML = ((nota1+nota2+nota3)/3);
+  
+  var apr="Aprobado";
+  var rep="Reprobado";
+  var aba="Abandono";
+  if(nota1!=0 && nota2!=0 && nota3!=0 ){
+    if(notafinal=> 51){
+    
+     $("#observaciones").val(apr);
+     $("#observacion").html(apr);
+     $("#notafinal").val(notafinal);
+    }else{
+  
+     $("#observaciones").val(rep);
+     $("#observacion").html(rep);
+     $("#notafinal").val(notafinal);
+    }
+  }else{
+ 
+  $("#observaciones").val(aba);
+  $("#observacion").html(aba);
+  $("#notafinal").val(notafinal);
+  }
+})
+
