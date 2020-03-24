@@ -194,21 +194,21 @@ $saldo = '';
 $literal = '';
 
 $pdf->Cell(10, 10, 'Nro', 1, 0, 'C', 0);
-$pdf->Cell(20, 10, 'Sigla', 1, 0, 'C', 0);
-$pdf->Cell(30, 10, 'Materia', 1, 0, 'C', 0);
-$pdf->Cell(15, 10, 'Nota', 1, 0, 'C', 0);
-$pdf->Cell(30, 10, 'Observacion', 1, 0, 'C', 0);
-$pdf->Cell(40, 10, 'Periodo', 1, 0, 'C', 0);
-$pdf->Cell(15, 10, 'Gestion', 1, 0, 'C', 0);
+$pdf->Cell(17, 10, 'Sigla', 1, 0, 'C', 0);
+$pdf->Cell(45, 10, 'Materia', 1, 0, 'C', 0);
+$pdf->Cell(13, 10, 'Nota', 1, 0, 'C', 0);
+$pdf->Cell(25, 10, 'Observacion', 1, 0, 'C', 0);
+$pdf->Cell(33, 10, 'Periodo', 1, 0, 'C', 0);
+$pdf->Cell(17, 10, 'Gestion', 1, 0, 'C', 0);
 $pdf->Cell(30, 10, 'Docente', 1, 1, 'C', 0);
 $pdf->SetFont('Arial', '', 9);
 
 while ($row = $resultado->fetch_assoc()) {
 	$pdf->Cell(10, 10, $co, 1, 0, 'C', 0);
 	$co++;
-	$pdf->Cell(20, 10, $row['sigla'], 1, 0, 'C', 0);
-	$pdf->Cell(30, 10, $row['nombre_m'], 1, 0, 'C', 0);
-	$pdf->Cell(15, 10, $row['notafinal'], 1, 0, 'C', 0);
+	$pdf->Cell(17, 10, $row['sigla'], 1, 0, 'C', 0);
+	$pdf->Cell(45, 10, $row['nombre_m'], 1, 0, 'C', 0);
+	$pdf->Cell(13, 10, $row['notafinal'], 1, 0, 'C', 0);
 	$nro = $row['notafinal'];
 	if ($row['notafinal'] >= '50') {
 		$saldo = $estado;
@@ -219,28 +219,28 @@ while ($row = $resultado->fetch_assoc()) {
 		$rep++;
 	}
     $total=$total+$nro;
-	$pdf->Cell(30, 10, $saldo, 1, 0, 'C', 0);
-	$pdf->Cell(40, 10, $row['fecha_curso'], 1, 0, 'C', 0);
-	$pdf->Cell(15, 10, $row['gestion'], 1, 0, 'C', 0);
+	$pdf->Cell(25, 10, $saldo, 1, 0, 'C', 0);
+	$pdf->Cell(33, 10, $row['fecha_curso'], 1, 0, 'C', 0);
+	$pdf->Cell(17, 10, $row['gestion'], 1, 0, 'C', 0);
 	$pdf->Cell(30, 10, $row['docente'], 1, 1, 'C', 0);
 }
-$pdf->SetFont('Arial', 'B', 9);
+$pdf->SetFont('Arial', 'B', 11);
 $pdf->Ln(4);
-$pdf->Cell(30, 10, utf8_decode('Aprobados : ') . utf8_decode($apr), 0, 0, 'C');
+$pdf->Cell(200, 10, utf8_decode('Aprobados : ') . utf8_decode($apr), 0, 0, 'C');
 $pdf->Ln(5);
-$pdf->Cell(30, 10, utf8_decode('Reprobados : ') . utf8_decode($rep), 0, 0, 'C');
+$pdf->Cell(200, 10, utf8_decode('Reprobados : ') . utf8_decode($rep), 0, 0, 'C');
 $pdf->Ln(5);
-$pdf->Cell(30, 10, utf8_decode('Abandono: ') . utf8_decode($aba), 0, 0, 'C');
+$pdf->Cell(200, 10, utf8_decode('Abandono: ') . utf8_decode($aba), 0, 0, 'C');
 $pdf->Ln(5);
-$pdf->Cell(35, 10, utf8_decode('Promedio General: ') . utf8_decode($total/($co-1)), 0, 0, 'C');
+$pdf->Cell(200, 10, utf8_decode('Promedio General: ') . utf8_decode($total/($co-1)), 0, 0, 'C');
 $pdf->Ln(5);
-$pdf->Cell(35, 10, utf8_decode('Promedio Oficial: ') . utf8_decode($total2/($apr)), 0, 0, 'C');
+$pdf->Cell(200, 10, utf8_decode('Promedio Oficial: ') . utf8_decode($total2/($apr)), 0, 0, 'C');
 
-
+$pdf->Ln(93);
 $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado");
 $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-$pdf->Ln(123);
-$pdf->SetFont('Arial','',8);
-$pdf->MultiCell(170, 6, utf8_decode('A petición del interesado, se expide la presente en la H. ciudad de LA PAZ, A los ' . " " . date('d') . " dias del mes de " . $meses[date('n') - 1] . " de " . date('Y') . "."), 0, 'J');
+
+$pdf->SetFont('Arial','',9);
+$pdf->MultiCell(200,6, utf8_decode('A petición del interesado, se expide la presente en la H. ciudad de LA PAZ, A los ' . " " . date('d') . " dias del mes de " . $meses[date('n') - 1] . " de " . date('Y') . "."), 0, 'J');
 $pdf->Output();
 ?>

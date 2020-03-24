@@ -247,28 +247,14 @@ class ControladorEstudiantes
 
     public static function CtrInscribir()
     {
-        echo "<script>";
-        echo "alert('";
-        echo  $_POST["observaciones"]."primera";
-        echo "')</script>";
+       
         if (isset($_POST["idest"])) {
-            echo "<script>";
-        echo "alert('";
-        echo  $_POST["notafinal"]."segunda ";
-        echo "')</script>";
+       
             if (preg_match('/^[0-9 ]+$/', $_POST["nota1"]) &&
                 preg_match('/^[0-9 ]+$/', $_POST["nota2"]) &&
-                preg_match('/^[0-9 ]+$/', $_POST["nota3"]) &&
-                preg_match('/^[0-9 ]+$/', $_POST["notafinal"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóú-ÁÉÍÓÚ ]+$/', $_POST["observaciones"]) 
-            ) {
+                preg_match('/^[0-9 ]+$/', $_POST["nota3"]) 
+                ){
                 $tabla = "toma";
-               
-                echo "<script>";
-                echo "alert('";
-                echo  $_POST["nota3"]."tercera ";
-                echo "')</script>";
-               
                 $datos = array(
                     "codest" => $_POST["idest"],
                     "cod_mat" => $_POST["nuevamateria"],
@@ -301,7 +287,7 @@ class ControladorEstudiantes
 
         swal({
             type: "error",
-            title: "¡El Estudiante no ha sido Agregado a la Materia!",
+            title: "¡El Estudiante no ha sido Agregado a la Materia por que ya se encuentra en la base de datos!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -317,7 +303,7 @@ class ControladorEstudiantes
                 echo '<script>
         swal({
             type: "error",
-            title: "¡El ci y cel de son solo numeros puede usar caracteres especiales ni letras , <br> deben estar sin caracteres especiales ni puntos!",
+            title: "¡INGRESE DATOS NUMERICOS Y LETRAS, <br> deben estar sin caracteres especiales ni puntos!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false

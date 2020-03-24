@@ -170,6 +170,9 @@ $("#Ci").change(function(){
 =============================================*/
 $("#nota1"&&"#nota2"&&"#nota3").change(function(){
 
+  var apr="Aprobado";
+  var rep="Reprobado";
+  var aba="Abandono";
   var nota1 = parseInt(document.getElementById("nota1").value);
   var nota2 = parseInt(document.getElementById("nota2").value);
   var nota3 = parseInt(document.getElementById("nota3").value);
@@ -177,11 +180,10 @@ $("#nota1"&&"#nota2"&&"#nota3").change(function(){
   notafinal=parseFloat((nota1+nota2+nota3)/3);
   document.getElementById('notaf').innerHTML = ((nota1+nota2+nota3)/3);
   
-  var apr="Aprobado";
-  var rep="Reprobado";
-  var aba="Abandono";
+  
   if(nota1!=0 && nota2!=0 && nota3!=0 ){
-    if(notafinal=> 51){
+
+    if(notafinal>= 51){
     
      $("#observaciones").val(apr);
      $("#observacion").html(apr);
