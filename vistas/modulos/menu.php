@@ -34,7 +34,7 @@
 				</a>
 
 			</li>
-			
+
 
 			<li>
 
@@ -47,12 +47,12 @@
 
 			</li>
 			<li>
-			<a href="docentes">
+				<a href="docentes">
 
-				<i class="fa fa-odnoklassniki"></i>
-				<span>Docentes</span>
+					<i class="fa fa-odnoklassniki"></i>
+					<span>Docentes</span>
 
-			</a>
+				</a>
 
 			</li>
 
@@ -68,6 +68,74 @@
 				</a>
 
 			</li>
+			<li>
+
+				<a href="correspondecia">
+
+					<i class="fa fa-envelope-o"></i>
+					<span>correspondecia</span>
+
+				</a>
+
+
+			</li>
+
+			<li class="treeview">
+
+				<a href="Correspondencia">
+
+					<i class="fa fa-envelope-o"></i>
+
+					<span>Correspondencia</span>
+
+					<span class="pull-right-container">
+
+						<i class="fa fa-angle-left pull-right"></i>
+
+					</span>
+
+				</a>
+
+				<ul class="treeview-menu">
+
+					<li>
+
+						<a href="corespinterna">
+
+							<i class="fa fa-circle-o"></i>
+							<span>Interna</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="corespexterna">
+
+							<i class="fa fa-circle-o"></i>
+							<span>Externa</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="coresphistorial">
+
+							<i class="fa fa-circle-o"></i>
+							<span>Historial total</span>
+
+						</a>
+
+					</li>
+				</ul>
+
+			</li>
+
+
+
 
 			<li class="treeview">
 
@@ -109,7 +177,7 @@
 
 					</li>
 
-					<li>
+					<i>
 
 						<a href="reportes">
 
@@ -118,7 +186,7 @@
 
 						</a>
 
-					</li>
+					</i>
 
 				</ul>
 

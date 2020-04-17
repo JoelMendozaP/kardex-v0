@@ -43,11 +43,6 @@
 
 
 
-
-
-
-
-
 <div class="container-login100" style="background-repeat:no-repeat;  background-image: url('extensiones/logint/images/lamejor.png'); background: no-repeat;  ">
 
 <div class="login-logo">
@@ -82,15 +77,12 @@
 						INGRESAR
 					</button>
 				</div>
-
 				<div class="text-center">
 					<a href="#" class="txt2 hov1">
 						BIENVENIDO AL SISTEMA QUE TENGA UN BUEN DIA :v
 					</a>
         </div>
         
-
-
         <?php
 
         $login = new ControladorUsuarios();
@@ -102,14 +94,7 @@
 			
 		</div>
 	</div>
-	
-	
-
 	<div id="dropDownSelect1"></div>
-
-
-
-
 
   </div>
 

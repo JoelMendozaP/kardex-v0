@@ -135,8 +135,7 @@
 				if (horas >= 19 && minutos >= 1) {
 					pSaludo.textContent = "Buenas Noches";
 				}
-
-
+				
 
 				if (dd < 10) {
 					dd = '0' + dd;

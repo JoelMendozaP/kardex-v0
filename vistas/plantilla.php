@@ -105,6 +105,10 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "estudiantes" ||
          $_GET["ruta"] == "inscribir" ||
          $_GET["ruta"] == "boleta" ||
+         $_GET["ruta"] == "correspondecia" ||
+         $_GET["ruta"] == "corespinterna" ||
+         $_GET["ruta"] == "corespexterna" ||
+         $_GET["ruta"] == "coresphistorial" ||
          $_GET["ruta"] == "salir"){
         include "modulos/".$_GET["ruta"].".php";
       }else{
@@ -128,8 +132,7 @@ CUERPO DOCUMENTO
 <script src="vistas/js/materia.js"></script>
 <script src="vistas/js/estudiante.js"></script>
 <script src="vistas/js/boleta.js"></script>
-
-
+<script src="vistas/js/carta.js"></script>
 
 </body>
 </html>
