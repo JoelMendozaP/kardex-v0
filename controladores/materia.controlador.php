@@ -3,9 +3,6 @@
 class Controladormaterias
 {
    
-    
-
-    
 
     static public function CtrCrearmateria()
     {

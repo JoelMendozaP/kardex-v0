@@ -35,3 +35,9 @@ $(".tablas").DataTable({
 		}
 	}
 });
+
+$(".select2-results").select2()({
+
+	
+	
+});

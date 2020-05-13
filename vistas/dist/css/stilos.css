@@ -340,6 +340,36 @@ display: flex;
     font-weight: 300;
     left: -2rem;
 } */
+
+.clockdate-wrapper {
+    background-color: #333;
+    padding:1px;
+    max-width:350px;
+    width:100%;
+    text-align:center;
+    border-radius:5px;
+    margin:0 auto;
+    margin-top:2px;
+}
+#clock{
+    background-color:#333;
+    font-family: sans-serif;
+    font-size:40px;
+    text-shadow:0px 0px 1px #fff;
+    color:#fff;
+}
+#clock span {
+    color:#888;
+    text-shadow:0px 0px 1px #333;
+    font-size:30px;
+    position:relative;
+    top:-1px;
+    left:-1px;
+}
+#date {
+    letter-spacing:4px;
+    font-size:10px;
+    font-family:arial,sans-serif;
+    color:#fff;
+}
  
-
-

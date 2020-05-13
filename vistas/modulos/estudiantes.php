@@ -16,8 +16,8 @@
   <!-- Main content -->
   <section class="content">
 
-    <!-- Default box -->
-    <div class="box">
+    
+    <div class="box" style="background: aliceblue">
       <div class="box-header with-border">
 
         <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAgregarEstudiante">
@@ -30,7 +30,7 @@
 
       <div class="box-body">
 
-        <table class="table table-bordered table-striped dt-responsive tablas" style="width:100%">
+        <table class="table table-bordered table-striped dt-responsive tablas bg-gray-light" style="width:100%">
           <thead>
             <tr>
 
@@ -463,7 +463,7 @@ $borrarestudiante->ctrBorrarestudiante();
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-archive"> </i></span>
-                <select class="form-control input-lg" id="nuevamateria" name="nuevamateria" style="color: black">
+                <select class="form-control input-lg select2-results select2-container--open" id="nuevamateria" name="nuevamateria" style="color: black; width: 100%; height: 30px;">
                   <?php
 
                   include("conexionmysqli.php");
@@ -493,6 +493,7 @@ $borrarestudiante->ctrBorrarestudiante();
                 </p>
               </div>
             </div>
+
 
                       <!-- Nota final  -->
             <div class="form-group">

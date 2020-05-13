@@ -1,966 +1,927 @@
 <div class="content-wrapper">
-  <section class="content-header">
+    <section class="content-header">
+        <h1> <b> <i>
+                    Correspondencia Externa
+                </i>
+            </b>
 
-    <h1>
-      Correspondencia
-    </h1>
-
-    <ol class="breadcrumb">
-      <li><a href="estudiante"><i class="fa fa-dashboard"></i> Inicio</a></li>
-
-      <li class="active">Correspondencia</li>
-    </ol>
-
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
-
-    <!-- Default box -->
-    <div class="box">
-     
-
-
-    <div class="nav-tabs-custom">
-    <ul class="nav nav-tabs">
-      <li class=""><a href="#activity" data-toggle="tab" aria-expanded="false">Bandeja de entrada</a></li>
-      <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Saliente</a></li>
-      <li class=""><a href="#reportes" data-toggle="tab" aria-expanded="true">Reportes</a></li>
-      <li class=""><a href="#historial" data-toggle="tab" aria-expanded="true">historial</a></li>
-      <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">emitir</a></li>
-
-      <li class="dropdown open">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="corespexterna"><i class="fa fa-dashboard"></i>Inicio</a></li>
+            <li class="active"> Correspondencia Externa
             </li>
+        </ol>
+    </section>
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-header with-border">
+
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">BANDEJA DE ENTRADA EXTERNA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">BANDEJA DE SALIDA EXTERNA</a>
+                    </li>
+                   
+
+                </ul>
 
 
+                <div class="tab-content" id="pills-tabContent">
+
+                    <!-- Default box -->
+
+                    <div class="tab-pane fade " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" style="background: skyblue ">
+                        <br>
+                        <div class="box-header with-border">
+                            <button class="btn bg-navy btn-lg" data-toggle="modal" data-target="#modalregistrarcartaex">
+                                Registrar Carta Externa
+                            </button>
+                            <br>
+                        </div>
+
+                        <div class="box-body">
+
+                            <table class="table table-bordered table-striped dt-responsive tablas bg-gray" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 1px">#</th>
+                                        <th style="width: 5px">Fecha de cambio</th>
+                                        <th style="width: 8px">Hoja de ruta</th>
+                                        <th style="width: 15px">Remitente</th>
+                                        <th style="width: 15px">Entidad</th>
+                                        <th style="width: 20px">Referencia</th>
+                                        <th style="width: 15px">Receptor Actual</th>
+                                        <th style="width: 8px">fecha de Carta</th>
+                                        <th style="width: 8px">fecha de plazo</th>
+                                        <th style="width: 5px">Prioridad</th>
+                                        <th style="width: 8px">Estado</th>
+                                        <th style="width: 10px">observacion</th>
+                                        <th style="width: 15px">Foto</th>
+                                        <th style="width: 25px">Acciones </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    <?php
+                                    $item = null;
+                                    $valor = null;
+                                    $aux = null;
+                                    $carta = Controladorcoresexterna::ctrMostrarcoresexterna($item, $valor);
+
+                                    foreach ($carta as $key => $value) {
+                                        echo '<tr>
+                                <td>' . ($key + 1) . '</td>
+                                <td>' . $value["fechentre"] . '</td>
+                                <td>' . $value["ruta"] . '</td>    
+                                <td>' . $value["remitente"] . '</td>                
+                                <td>' . $value["entidad"] . '</td>
+                                <td>' . $value["referencia"] . '</td>
+                                <td>'  . $value["nombre"] . " - " . $value["ap_paterno"] . ' - ' . $value["ap_materno"] . '</td>
+                                <td>' . $value["fechacarta"] . '</td>
+                                <td>' . $value["fechaplazo"] . '</td>
+                                <td>' . $value["prioridad"] . '</td>';
+                                if ($value["estadoproceso"] ==='Inicial'){
+                                    echo '<td style="with: 10px"><button class="btn bg-purple-active btn-xs">'.$value["estadoproceso"].'</button></td>';
+                                        }else{
+                                            if ($value["estadoproceso"] ==='Primario'){
+                                             echo '<td style="with: 10px"><button class="btn bg-red-active btn-xs">'.$value["estadoproceso"].'</button></td>';
+                                            }else{
+                                                if ($value["estadoproceso"] ==='Medio'){
+                                                 echo '<td style="with: 10px"><button class="btn bg-orange-active btn-xs">'.$value["estadoproceso"].'</button></td>';
+                                                 }else{
+                                                    if ($value["estadoproceso"] ==='Final'){
+                                                        echo '<td style="with: 10px"><button class="btn btn-success btn-xs">'.$value["estadoproceso"].'</button></td>';
+                                                         }else{
+                                                            if ($value["estadoproceso"] ==='Terminado'){
+                                                                 echo '<td style="with: 10px"><button class="btn bg-gray btn-xs">'.$value["estadoproceso"].'</button></td>';
+                                                                 }else{
+                                                                    if ($value["estadoproceso"] ==='Desactivado'){
+                                                                 echo '<td style="with: 10px"><button class="btn bg-black-active btn-xs">'.$value["estadoproceso"].'</button></td>';
+                                                                 }else{
+                                                                 echo '<td><button class="btn bg-gray btn-xs">'.$value["estadoproceso"].'</button></td>';
+                                                                     }
+                                                                
+                                                              }
+                                                        }
+                                                 }
+                                            }
+                                     
+                                      }
+                      echo '<td>' . $value["observacion"] . '</td>
+                                <td> <button class="btn btn-success btnvisor" idcarta="' . $value["cod_carta"] . '" fotocarta="' . $value["fotocarta"] . '" title="!VISUALIZAR DOCUMENTO!" data-toggle="modal" data-target="#revisor"> <i class="fa fa-plus-square"></i></button></td>                                
+                                 <td>
+                                 <div  class="btn-group">
+                                 <button class="btn btn-warning btnEditarcartainterna"  idusuario="' . $value["dni"] . '"  idcarta="' . $value["cod_carta"] . '" title="!!EDITAR REGISTRO DE CARTA  EXTERNA!!" data-toggle="modal" data-target="#revisores"> <i class="fa fa-pencil"></i></button>
+                                 <button class="btn btn-danger  btnEliminarcartainterna" idcartas="' . $value["cod_carta"] . '" fotocartas="' . $value["fotocarta"] . '" remitente="' . $value["remitente"] . '" title="!!ELIMINAR DE CARTA EXTERNA!!"> <i class="fa fa-times"></i></button>
+                                 <button class="btn bg-gray-active historialcartas" href="historialcartaexterna" idcartahitorialex="' . $value["cod_carta"] . '" codu="' . $value["cod_user"] . '"  title="HISTORIAL DE LA CARTA"> <i class="fa fa-download"></i></button>
+                                 <button class="btn btn-info  btnreasignar" remitente="' . $value["remitente"] . '" codusuarioh="' . $value["cod_user"] . '" receptoract="' . $value["dnia"] . '"  codcartah="' . $value["cod_carta"] .'" title="!!REASIGNAR RESPONSABILIDAD DE CARTA!!" data-toggle="modal" data-target="#reasignar"> <i class="fa fa-mouse-pointer"></i></button>
+                                 
+                                  </div>
+                                 
+                                 
+                                 </td>
+                                </tr>';
+                                    }
+                                    ?>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
 
 
+                    <!--  BANDEJA DE SALIDA  EXTERNA -->
+                    <div class="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="background: skyblue">
+                        <!--  BANDEJA DE SALIDA EXTERNA -->
+                        <br>
+                        <div class="box-header with-border">
+                            <button class="btn bg-black-active btn-lg" data-toggle="modal" data-target="#modalCrearcarta">
+                                Crear Carta Externa
+                            </button>
+                            <br>
+                        </div>
+
+                        <div class="box-body">
+
+                            <table class="table table-bordered table-striped dt-responsive tablas bg-gray" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 1px">#</th>
+                                        <th style="width: 8px">Fecha de Carta</th>
+                                        <th style="width: 8px">Dirijida a</th>
+                                        <th style="width: 15px">Cargo del dirijido</th>
+                                        <th style="width: 15px">Referencia</th>
+                                        <th style="width: 20px">emisor</th>
+                                        <th style="width: 15px">cargo del emisor</th>
+                                        <th style="width: 20px">creador de la carta</th>
+                                        <th style="width: 20px">PDF</th>
+                                        <th style="width: 20px">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $item = null;
+                                    $valor = null;
+                                    $cartacreada = Controladorcoresexterna::ctrMostrarcartacreadaex($item, $valor);
+
+                                    foreach ($cartacreada as $key => $value) {
+                                        echo '<tr>
+                                <td>' . ($key + 1) . '</td>
+                                <td>' . $value["fechaemicion"] . '</td>
+                                <td>' . $value["dirijida"] . '</td>    
+                                <td>' . $value["cargodir"] . '</td>                
+                                <td>' . $value["referencia"] . '</td>
+                                <td>' . $value["emisor"] . '</td>
+                                <td>' . $value["cargoemisor"] . '</td>
+                                <td>'  . $value["nombre"] . " - " . $value["ap_paterno"] . ' - ' . $value["ap_materno"] . '</td>
+                                <td>   
+                                
+                                <button class="btn btn-success btnimpri" codcartac="' . $value["cod_crearcarta"] . '"><i class="fa fa-print "></i></button> </td>                                
+                                 
+                                <td>
+                                 <div  class="btn-group">
+                                 <button class="btn btn-warning btnEditarccarta"  ciusuario="' . $value["dni"] . '"  idcartas="' . $value["cod_crearcarta"] . '"  data-toggle="modal" data-target="#modalEditarCrearcarta"> <i class="fa fa-pencil"></i></button>
+                                 
+                                 <button class="btn btn-danger  btnEliminarcartac" codcartacreada="' . $value["cod_crearcarta"] . '" ciusu="' . $value["dni"] . '"> <i class="fa fa-times"></i></button>
+                                                                 
+                                 </div>
+                                 </td>
+                                </tr>';
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
 
 
+                    
 
-
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane" id="activity">
-        <!-- Post -->
-        <div class="post">
-          <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                <span class="username">
-                  <a href="#">Jonathan Burke Jr.</a>
-                  <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                </span>
-            <span class="description">Shared publicly - 7:30 PM today</span>
-          </div>
-          <!-- /.user-block -->
-          <p>
-            Lorem ipsum represents a long-held tradition for designers,
-            typographers and the like. Some people hate it and argue for
-            its demise, but others ignore the hate as they create awesome
-            tools to help create filler text for everyone from bacon lovers
-            to Charlie Sheen fans.
-          </p>
-          <ul class="list-inline">
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-            </li>
-            <li class="pull-right">
-              <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                (5)</a></li>
-          </ul>
-
-          <input class="form-control input-sm" type="text" placeholder="Type a comment">
-        </div>
-        <!-- /.post -->
-
-        <!-- Post -->
-        <div class="post clearfix">
-          <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
-                <span class="username">
-                  <a href="#">Sarah Ross</a>
-                  <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                </span>
-            <span class="description">Sent you a message - 3 days ago</span>
-          </div>
-          <!-- /.user-block -->
-          <p>
-            Lorem ipsum represents a long-held tradition for designers,
-            typographers and the like. Some people hate it and argue for
-            its demise, but others ignore the hate as they create awesome
-            tools to help create filler text for everyone from bacon lovers
-            to Charlie Sheen fans.
-          </p>
-
-          <form class="form-horizontal">
-            <div class="form-group margin-bottom-none">
-              <div class="col-sm-9">
-                <input class="form-control input-sm" placeholder="Response">
-              </div>
-              <div class="col-sm-3">
-                <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <!-- /.post -->
-
-        <!-- Post -->
-        <div class="post">
-          <div class="user-block">
-            <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
-                <span class="username">
-                  <a href="#">Adam Jones</a>
-                  <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                </span>
-            <span class="description">Posted 5 photos - 5 days ago</span>
-          </div>
-          <!-- /.user-block -->
-          <div class="row margin-bottom">
-            <div class="col-sm-6">
-              <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-6">
-              <div class="row">
-                <div class="col-sm-6">
-                  <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
-                  <br>
-                  <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
                 </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                  <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
-                  <br>
-                  <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+    </section>
+
+
+
+
+
+    <!-- CARTA EXTERNA-->
+
+    <!-- CLASE MODAL REGISTRAR CARTA EXTERNA-->
+    <div class="modal fade" id="modalregistrarcartaex">
+        <div class="modal-dialog">
+
+            <div class="modal-content bg-navy-active">
+                <form role="form" method="POST" enctype="multipart/form-data">
+                    <!-- cabeza del modal-->
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                            <span aria-hidden="true">&times;</span></button>
+
+                        <h4 class="modal-title">Registrar Carta Externa</h4>
+
+                    </div>
+                    <!-- cuerpo del modal -->
+                    <div class="modal-body">
+
+                        <div class="box-body">
+
+                            <!-- hoja de ruta-->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <p>
+                                        <i class="fa fa-commenting">
+
+                                            <input type="text" class="input-lg" style="color: black" placeholder="Hoja de ruta" name="nuevoruta" id="nuevoruta" size="50">
+                                        </i>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- fechas de plazo y de carta -->
+                            <div class="form-group">
+                                <div class="icono-nosotros">
+                                    <h4>Fecha de Carta</h4>
+                                    <h4>Fecha de Plazo</h4>
+                                </div>
+                                <p>
+                                    <div class="icono-nosotros">
+                                        <input type="date" class="input-lg" style="color: black" name="nuevofechacarta" id="nuevofechacarta" size="12">
+                                        <input type="date" class="input-lg" style="color: black" name="nuevofechaplazo" id="nuevofechaplazo" size="12">
+                                    </div>
+                                </p>
+                            </div>
+
+                            <!-- remitente  -->
+                            <div class="input-group">
+                                <P> <i class="fa fa-unlock-alt">
+                                        <input type="text" class="input-lg" style="color: black" placeholder=" remitente " name="nuevoremitente" id="nuevoremitente" size="40" required> </i> </p>
+                            </div>
+
+                            <!-- Entidad  -->
+                            <div class="input-group">
+                                <P> <i class="fa fa-unlock-alt">
+                                        <input type="text" class="input-lg" style="color: black" placeholder="Entidad " name="nuevoentidad" id="nuevoentidad" size="40" required> </i> </p>
+                            </div>
+
+
+                            <!-- Referencia -->
+                            <div class="form-group">
+                                <label>Referencia</label>
+                                <textarea class=" form-control" rows="3" placeholder="Ing. Ref " name="nuevoreferencia" id="nuevoreferencia" style="margin-top: 0px; margin-bottom: 0px; height: 99px;" required></textarea>
+                            </div>
+
+                            <!-- Receptor Actual-->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-archive"> </i></span>
+                                    <select class="form-control input-lg" id="nuevoreceptor" name="nuevoreceptor" style="color: black">
+                                        <?php
+
+                                        include("conexionmysqli.php");
+                                        $query = "SELECT * FROM usuarios";
+
+                                        $resultado = $conexion->query($query);
+                                        echo '<option value="">Perfil Nombre Ap_paterno Ap_materno  Cargo</option>';
+
+                                        while ($row = $resultado->fetch_assoc()) {
+                                        ?>
+                                            
+                                            <option value="<?php echo $row['dni']; ?>" ><?php echo $row['perfil'] . "   " . $row['nombre'] . "   " . $row['ap_paterno'] . "   " . $row['ap_materno'] . "   " . $row['cargo']; ?> </option>
+        
+                                        <?php
+                                        } ?>
+                                    </select>
+                                </div>
+                            </div>
+                          
+                            <!-- Prioridad-->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users"> </i></span>
+                                    <select class="form-control input-lg" name="prioridad">
+                                        <option value="Seleccionar Prioridad ">Seleccionar Prioridad</option>
+                                        <option value="Alarmante">Alarmante</option>
+                                        <option value="Muy Alta">Muy Alta</option>
+                                        <option value="Alta">Alta</option>
+                                        <option value="media">media</option>
+                                        <option value="baja">baja</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Estado-->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users"> </i></span>
+                                    <select class="form-control input-lg" name="estado">
+                                        <option value="Seleccionar Estado ">Seleccionar Estado</option>
+                                        <option value="Inicial">Inicial</option>
+                                        <option value="Primario">Primario</option>
+                                        <option value="Medio">Medio</option>
+                                        <option value="Final">Final</option>
+                                        <option value="Terminado">Terminado</option>
+                                    <option value="Conjelado">Conjelado</option>
+                                        <option value="Desactivado">Desactivado</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Observacion -->
+                            <div class="form-group">
+                                <label>Observacion</label>
+                                <textarea class=" form-control" rows="3" placeholder="Ing. Ref ..." name="nuevoobservacion" id="nuevoobservacion" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                            </div>
+
+                            <!-- Subir foto Del Documento -->
+                            <h4 class="modal-title">Subir Foto Del Documento</h4>
+                            <div class="form-group">
+
+                                <input type="file" class="nuevafotocarta" name="nuevafotocarta">
+                                <p class="help-block">Peso maximo de una Foto es de 2MB</p>
+                                <img src="vistas/img/usuarios/default/usn.png" class="img-thumbnail previsualizar" width="100px">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pie del modal-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn 
+                      btn-outline pull-left" data-dismiss="modal">Salir</button>
+                        <button type="submit" class="btn btn-outline">Guardar Registro</button>
+                    </div>
+                    <?php
+                    $crearregistrocartaex = new Controladorcoresexterna();
+                    $crearregistrocartaex->CtrCrearcartaext();
+                    ?>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CLASE MODAL REVISOR DE IMAGEN EXTERNA -->
+    <div class="modal fade bd-example-modal-lg  modal-success tabindex=" -1" id="revisor" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form role="form" method="POST" enctype="multipart/form-data">
+                    <!-- cabeza del modal-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Imagen de la carta</h4>
+                    </div>
+                    <!-- cuerpo del modal -->
+                    <div class="modal-body">
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <iframe src="vistas/img/usuarios/default/usn.png" class="previsualizar" height="1200px" width="100%">
+                                </iframe>
+                                <input type="hidden" name="fotoApre" id="fotoApre">
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.pie del modal-->
+                    <div class="modal-footer">
+                        <div type="button" class="btn  btn-outline pull-right" data-dismiss="modal">SALIR</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php
+    $eliminarregistrocarta = new Controladorcoresexterna();
+    $eliminarregistrocarta->ctrBorrarCartaexterna();
+    ?>
+    </section>
+</div>
+
+<!-- CLASE EDITAR CARTAEXTERNA-->
+<div class="modal modal-warning fade" id="revisores">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form role="form" method="POST" enctype="multipart/form-data">
+                <!-- cabeza del modal-->
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                        <span aria-hidden="true">&times;</span></button>
+
+                    <h3 class="modal-title">Editar Registro de Carta Externa</h3>
+
                 </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.col -->
-          </div>
-          <!-- /.row -->
-
-          <ul class="list-inline">
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-            </li>
-            <li class="pull-right">
-              <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                (5)</a></li>
-          </ul>
-
-          <input class="form-control input-sm" type="text" placeholder="Type a comment">
-        </div>
-        <!-- /.post -->
-      </div>
-      <!-- /.tab-pane -->
-      <div class="tab-pane" id="timeline">
-        <!-- The timeline -->
-        <ul class="timeline timeline-inverse">
-          <!-- timeline time label -->
-          <li class="time-label">
-                <span class="bg-red">
-                  10 Feb. 2014
-                </span>
-          </li>
-          <!-- /.timeline-label -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-envelope bg-blue"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-              <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-              <div class="timeline-body">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                quora plaxo ideeli hulu weebly balihoo...
-              </div>
-              <div class="timeline-footer">
-                <a class="btn btn-primary btn-xs">Read more</a>
-                <a class="btn btn-danger btn-xs">Delete</a>
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-user bg-aqua"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-              <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-              </h3>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-comments bg-yellow"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-              <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-              <div class="timeline-body">
-                Take me to your leader!
-                Switzerland is small and neutral!
-                We are more like Germany, ambitious and misunderstood!
-              </div>
-              <div class="timeline-footer">
-                <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline time label -->
-          <li class="time-label">
-                <span class="bg-green">
-                  3 Jan. 2014
-                </span>
-          </li>
-          <!-- /.timeline-label -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-camera bg-purple"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-              <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-              <div class="timeline-body">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <li>
-            <i class="fa fa-clock-o bg-gray"></i>
-          </li>
-        </ul>
-      </div>
-      <!-- /.tab-pane -->
-
-
-
-      <div class="tab-pane" id="historial">
-        <!-- The timeline -->
-        <ul class="timeline timeline-inverse">
-          <!-- timeline time label -->
-          <li class="time-label">
-                <span class="bg-red">
-                  10 Feb. 2014
-                </span>
-          </li>
-          <!-- /.timeline-label -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-envelope bg-blue"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-              <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-              <div class="timeline-body">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                quora plaxo ideeli hulu weebly balihoo...
-              </div>
-              <div class="timeline-footer">
-                <a class="btn btn-primary btn-xs">Read more</a>
-                <a class="btn btn-danger btn-xs">Delete</a>
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-user bg-aqua"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-              <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-              </h3>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-comments bg-yellow"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-              <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-              <div class="timeline-body">
-                Take me to your leader!
-                Switzerland is small and neutral!
-                We are more like Germany, ambitious and misunderstood!
-              </div>
-              <div class="timeline-footer">
-                <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline time label -->
-          <li class="time-label">
-                <span class="bg-green">
-                  3 Jan. 2014
-                </span>
-          </li>
-          <!-- /.timeline-label -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-camera bg-purple"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-              <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-              <div class="timeline-body">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <li>
-            <i class="fa fa-clock-o bg-gray"></i>
-          </li>
-        </ul>
-      </div>
-
-
-      <div class="tab-pane" id="reportes">
-        <!-- The timeline -->
-        <ul class="timeline timeline-inverse">
-          <!-- timeline time label -->
-          <li class="time-label">
-                <span class="bg-red">
-                  10 Feb. 2014
-                </span>
-          </li>
-          <!-- /.timeline-label -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-envelope bg-blue"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-              <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-              <div class="timeline-body">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                quora plaxo ideeli hulu weebly balihoo...
-              </div>
-              <div class="timeline-footer">
-                <a class="btn btn-primary btn-xs">Read more</a>
-                <a class="btn btn-danger btn-xs">Delete</a>
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-user bg-aqua"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-              <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-              </h3>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-comments bg-yellow"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-              <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-              <div class="timeline-body">
-                Take me to your leader!
-                Switzerland is small and neutral!
-                We are more like Germany, ambitious and misunderstood!
-              </div>
-              <div class="timeline-footer">
-                <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <!-- timeline time label -->
-          <li class="time-label">
-                <span class="bg-green">
-                  3 Jan. 2014
-                </span>
-          </li>
-          <!-- /.timeline-label -->
-          <!-- timeline item -->
-          <li>
-            <i class="fa fa-camera bg-purple"></i>
-
-            <div class="timeline-item">
-              <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-              <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-              <div class="timeline-body">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                <img src="http://placehold.it/150x100" alt="..." class="margin">
-              </div>
-            </div>
-          </li>
-          <!-- END timeline item -->
-          <li>
-            <i class="fa fa-clock-o bg-gray"></i>
-          </li>
-        </ul>
-      </div>
-
-      <div class="tab-pane active" id="settings">
-        <form class="form-horizontal">
-          <div class="form-group">
-            <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputName" placeholder="Name">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputName" placeholder="Name">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-            <div class="col-sm-10">
-              <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-danger">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-    <!-- /.tab-content -->
-  </div>
-
-
-
-
-
-</div>
-<!-- /.content-wrapper -->
-
-
-<!-- CLASE MODAL -->
-<div class="modal modal-info fade" id="modalAgregarEstudiante">
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-      <form role="form" method="POST" enctype="multipart/form-data">
-        <!-- cabeza del modal-->
-        <div class="modal-header">
-
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-            <span aria-hidden="true">&times;</span></button>
-
-          <h4 class="modal-title">Agregar Estudiante</h4>
-
-        </div>
-        <!-- cuerpo del modal -->
-        <div class="modal-body">
-
-          <div class="box-body">
-
-            <!-- NOMBRE-->
-            <div class="form-group">
-              <div class="input-group">
-                <p>
-                  <i class="fa fa-commenting">
-
-                    <input type="text" class="input-lg" style="color: black" placeholder="Nombre" name="nombre" id="nombre" size="50">
-                  </i>
-                </p>
-              </div>
-            </div>
-            <!-- APELLIDOS -->
-            <div class="form-group">
-              <div class="input-group">
-                <p>
-                  <i class="fa fa-commenting-o">
-                    <input type="text" class="input-lg" style="color: black" placeholder="Ap Paterno" name="ApPaterno" id="ApPaterno" size="22">
-                    <input type="text" class="input-lg" style="color: black" placeholder="Ap Materno" name="ApMaterno" id="ApMaterno" size="22">
-                  </i>
-                </p>
-              </div>
-            </div>
-            <!-- CI  -->
-
-            <div class="input-group">
-              <P> <i class="fa fa-unlock-alt">
-                  <input type="text" class="input-lg" style="color: black" placeholder=" CI " name="Ci" id="Ci" size="40"> </i> </p>
-            </div>
-
-            <!-- GENERO  -->
-            <div class="form-group">
-              <div class="input-group">
-                <p>
-                  <h3> Genero: </h3>
-                  <h4>
-                    <input type="radio" name="genero" value="Masculino"> Hombre
-                    <input type="radio" name="genero" value="Femenino"> Mujer
-                    <input type="radio" name="genero" value="Otro"> Otro
-                  </h4>
-                </p>
-              </div>
-            </div>
-
-            <!-- CELULAR -->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
-                <input type="text" class="form-control input-lg" style="color: black" id="nrocel" name="nrocel" placeholder="Ingresar Numero de cel:">
-              </div>
-            </div>
-            <!--  REG UNIV -->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
-                <input type="text" class="form-control input-lg" style="color: black" id="matricula" name="matricula" placeholder="Ingresar Reg. Univ">
-              </div>
-            </div>
-
-
-            <!--EMAIL -->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
-                <input type="text" class="form-control input-lg" style="color: black" placeholder="Ingresar Email" name="email" id="email">
-              </div>
-            </div>
-            <!-- ESTADO-->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
-                <select class="form-control input-lg" name="estado">
-                  <option value=" Seleccionar Estado ">Seleccionar Estado</option>
-                  <option value=" Activo">Activo</option>
-                  <option value=" InactIvo">Inactivo</option>
-                  <option value=" Titulado">Titulado</option>
-                  <option value=" Egreados">Egreados</option>
-                  <option value=" Cambio de carrera">Cambio de carrera</option>
-                  <option value=" Paralela">Paralela</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- MODO_ INGR-->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
-                <select class="form-control input-lg" name="ingreso">
-                  <option value=" Seleccionar modo de Ingreso ">Seleccionar modo de Ingreso</option>
-                  <option value=" Examen De suficiencia A.">Examen De suficiencia A.</option>
-                  <option value=" Ingreso libre">Ingreso libre</option>
-                  <option value=" Prefacultativos">Prefacultativos</option>
-                  <option value=" Admicion Especial">Admicion Especial</option>
-                  <option value=" Beca">Beca Municipio</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- MODO EGRE-->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
-                <select class="form-control input-lg" name="egreso">
-                  <option value=" Seleccionar un modo de Egreso ">Seleccionar un modo de Egreso</option>
-                  <option value=" Examen de Grado">Examen de Grado</option>
-                  <option value=" Trabajo Dirijido">Trabajo Dirijido</option>
-                  <option value=" Proyecto de Grado">Proyecto de Grado</option>
-                  <option value=" Tesis de Grado">Tesis de Grado</option>
-                  <option value=" Exelencia">Exelencia</option>
-                  <option value=" P.E.T.A.E.N.G.">P.E.T.A.E.N.G.</option>
-                  <option value=" Incompleta">Incompleta</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- FECHA DE NACIMIENTO -->
-            <div class="form-group">
-              <h4>FECHA DE NACIMIENTO</h4>
-              <div class="input-group">
-
-                <h4 class="modal-title"> </h4>
-                <span class="input-group-addon"><i class="fa  fa-qq"> </i></span>
-                <input type="date" class=" form-control input-lg" name="nacimiento" data-datepicker-color="primary">
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.pie del modal-->
-        <div class="modal-footer">
-          <button type="button" class="btn 
+                <!-- cuerpo del modal -->
+                <div class="modal-body">
+
+                    <div class="box-body">
+
+                        <!-- iddecarta-->
+                        <input type="hidden" name="idcarta" id="idcarta">
+                        <!-- hoja de ruta-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <p>
+                                    <i class="fa fa-commenting">
+
+                                        <input type="text" class="input-lg" style="color: black" placeholder="Hoja de ruta" name="editarruta" id="editarruta" size="50">
+                                    </i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- fechas de plazo y de carta -->
+                        <div class="form-group">
+                            <div class="icono-nosotros">
+                                <h1>Fecha de Carta</h1>
+                                <h1>Fecha de Plazo</h1>
+                            </div>
+                            <p>
+                                <div class="icono-nosotros">
+                                    <input type="date" class="input-lg" style="color: black" name="editarfechacarta" id="editarfechacarta" size="12">
+                                    <input type="date" class="input-lg" style="color: black" name="editarfechaplazo" id="editarfechaplazo" size="12">
+                                </div>
+                            </p>
+                        </div>
+
+                        <!-- remitente  -->
+                        <div class="input-group">
+                            <P> <i class="fa fa-unlock-alt">
+                                    <input type="text" class="input-lg" style="color: black" placeholder=" remitente " name="editarremitente" id="editarremitente" size="40" required> </i> </p>
+                        </div>
+
+                        <!-- Entidad  -->
+                        <div class="input-group">
+                            <P> <i class="fa fa-unlock-alt">
+                                    <input type="text" class="input-lg" style="color: black" placeholder="Entidad " name="editarentidad" id="editarentidad" size="40" required> </i> </p>
+                        </div>
+
+
+                        <!-- Referencia -->
+                        <div class="form-group">
+                            <label>Referencia</label>
+                            <textarea class=" form-control" rows="3" placeholder="Ing. Ref ..." name="editarreferencia" id="editarreferencia" style="margin-top: 0px; margin-bottom: 0px; height: 99px;" required></textarea>
+                        </div>
+
+                        <!-- Receptor Actual-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-archive"> </i></span>
+                                <select class="form-control input-lg" name="editarreceptor" id="editarreceptor" style="color: black">
+
+                                    <?php
+
+                                    include("conexionmysqli.php");
+
+                                    $query = "SELECT * FROM usuarios";
+
+                                    $resultado = $conexion->query($query);
+
+                                    while ($row = $resultado->fetch_assoc()) {
+                                    ?>
+                                        <option value="<?php echo $row['dni']; ?>" id="editarreceptor"><?php echo $row['perfil'] . "   " . $row['nombre'] . "   " . $row['ap_paterno'] . "   " . $row['ap_materno'] . "   " . $row['cargo']; ?> </option>
+                                    <?php
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Prioridad-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
+                                <select class="form-control input-lg" name="editarprioridad">
+                                    <option value="" id="editarprioridad">Seleccionar Prioridad</option>
+                                    <option value="Alarmante">Alarmante</option>
+                                    <option value="Muy Alta">Muy Alta</option>
+                                    <option value="Alta">Alta</option>
+                                    <option value="media">media</option>
+                                    <option value="baja">baja</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Estado-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
+                                <select class="form-control input-lg" name="editarestado">
+                                    <option value="" id="editarestado">Seleccionar Estado</option>
+                                    <option value="Inicial">Inicial</option>
+                                    <option value="Primario">Primario</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Final">Final</option>
+                                    <option value="Terminado">Terminado</option>
+                                    <option value="Conjelado">Conjelado</option>
+                                    <option value="Desactivado">Desactivado</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Observacion -->
+                        <div class="form-group">
+                            <label>Observacion</label>
+                            <textarea class=" form-control" rows="3" placeholder="Ing. Obser ..." name="editarobservacion" id="editarobservacion" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+
+                        <!-- Subir foto Del Documento -->
+                        <h4 class="modal-title">Subir Foto Del Documento</h4>
+                        <div class="form-group">
+
+                            <input type="file" class="nuevafotocarta" name="editarfotocarta">
+                            <p class="help-block">Peso maximo de una Foto es de 2MB</p>
+                            <iframe src="vistas/img/usuarios/default/usn.png" class=" previsualizar" width="100%">
+                            </iframe>
+                            <input type="hidden" name="fotoActualcarta" id="fotoActualcarta">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn 
                       btn-outline pull-left" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-outline">Guardar estudiante</button>
+                    <button type="submit" class="btn btn-outline">Guardar Editado</button>
+                </div>
+
+                <?php
+                $editarcartaexternas = new Controladorcoresexterna();
+                $editarcartaexternas->ctreditarcartaext();
+                ?>
+            </form>
         </div>
-        <?php
-        $crearmateria = new ControladorEstudiantes();
-        $crearmateria->CtrCrearestudiante();
-        ?>
-      </form>
-
     </div>
-  </div>
-
 </div>
 
+<!--  CARTA INTERNA//-->
 
+<!-- CLASE MODAL CREAR CARTA -->
+<div class="modal fade bd-example-modal-lg " tabindex=" -1" id="modalCrearcarta" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content  bg-gray-active">
+            <form role="form" method="POST" enctype="multipart/form-data">
+                <!-- cabeza del modal-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">CREAR CARTA EXTERNA</h4>
+                </div>
+                <!-- cuerpo del modal -->
+                <div class="modal-body">
+                    <div class="box-body">
 
+                        <!-- HOJA DE RUTA -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class=" fa fa-envelope-square"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder="Ingresar Ruta :" name="rutacreada" id="rutacreada">
+                            </div>
+                        </div>
 
-<!-- CLASE MODAL EDITAR-->
-<div class="modal modal-info fade" id="ModalEditarestudiante">
-  <div class="modal-dialog">
+                        <!-- Lugar y fecha-->
+                        <div class="form-group ">
+                            <div class="input-group icono-nosotros ">
 
-    <div class="modal-content">
-      <form role="form" method="POST" enctype="multipart/form-data">
-        <!-- cabeza del modal-->
-        <div class="modal-header">
+                                <span class="input-group-addon"><i class="fa fa-calendar"> </i></span>
+                                <input type="date" class="form-control input-lg" style="color: black" placeholder="Ingrese fecha" name="crearfecha" id="crearfecha">
+                                <span class="input-group-addon"><i class="fa fa-map-marker"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder="Ingrese lugar" name="nuevolugar" id="nuevolugar">
 
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </div>
+                        </div>
 
-            <span aria-hidden="true">&times;</span></button>
+                        <!-- dirijida -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class=" fa fa-external-link"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder="Dirijida A:" name="dirijida" id="dirijida">
+                            </div>
+                        </div>
+                        <!-- Cargo -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-bank"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder="Cargo de :" name="cargo" id="cargo">
+                            </div>
+                        </div>
+                        <!-- Referencia solicitud-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-paper-plane-o"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder="Referencia o Solicitud :" name="crearreferencia" id="crearreferencia">
+                            </div>
+                        </div>
+                        <!-- Saludo Inicial-->
+                        <div class="form-group">
+                            <label>Saludo inicial</label>
+                            <textarea class=" form-control" rows="3" placeholder="Ing. Saludo inicial..." name="saludoinicial" id="saludoinicial" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
 
-          <h4 class="modal-title">Editar Estudiante</h4>
+                        <!-- Asunto -->
+                        <div class="form-group">
+                            <label>Asunto</label>
+                            <textarea class=" form-control" rows="3" placeholder="Ing. Asunto..." name="asunto" id="asunto" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+                        <!-- Despedida-->
+                        <div class="form-group">
+                            <label>Despedida</label>
+                            <textarea class=" form-control" rows="3" placeholder="Ing. Despedida..." name="despedida" id="despedida" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
 
-        </div>
-        <!-- cuerpo del modal -->
-        <div class="modal-body">
-
-          <div class="box-body">
-
-            <!-- NOMBRE-->
-            <div class="form-group">
-              <div class="input-group">
-                <p>
-                  <i class="fa fa-commenting">
-
-                    <input type="text" class="input-lg" style="color: black" value="Nombre" name="editarnombre" id="editarnombre" size="50">
-                  </i>
-                </p>
-              </div>
-            </div>
-            <!-- APELLIDOS -->
-            <div class="form-group">
-              <div class="input-group">
-                <p>
-                  <i class="fa fa-commenting-o">
-                    <input type="text" class="input-lg" style="color: black" value="" name="editarApPaterno" id="editarApPaterno" size="22">
-                    <input type="text" class="input-lg" style="color: black" value="" name="editarApMaterno" id="editarApMaterno" size="22">
-                  </i>
-                </p>
-              </div>
-            </div>
-            <!-- CI  -->
-
-            <div class="input-group">
-              <P> <i class="fa fa-unlock-alt">
-                  <input type="text" class="input-lg" style="color: black" value="" name="editarCi" id="editarCi" size="40"> </i> </p>
-            </div>
-
-            <!-- CELULAR -->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
-                <input type="text" class="form-control input-lg" style="color: black" id="editarnrocel" name="editarnrocel" value="">
-              </div>
-            </div>
-            <!--  REG UNIV -->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
-                <input type="text" class="form-control input-lg" style="color: black" id="editarmatricula" name="editarmatricula" value="">
-              </div>
-            </div>
-
-
-            <!--EMAIL -->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
-                <input type="text" class="form-control input-lg" style="color: black" value="" name="editaremail" id="editaremail">
-              </div>
-            </div>
-            <!-- ESTADO-->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
-                <select class="form-control input-lg" name="editarestado">
-                  <option value="" id="editarestado"></option>
-                  <option value=" Activo">Activo</option>
-                  <option value=" InactIvo">Inactivo</option>
-                  <option value=" Titulado">Titulado</option>
-                  <option value=" Egreados">Egreados</option>
-                  <option value=" Cambio de carrera">Cambio de carrera</option>
-                  <option value=" Paralela">Paralela</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- MODO_ INGR-->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
-                <select class="form-control input-lg" name="editaringreso">
-                  <option value="" id="editaringreso"></option>
-                  <option value=" Examen De suficiencia A.">Examen De suficiencia A.</option>
-                  <option value=" Ingreso libre">Ingreso libre</option>
-                  <option value=" Prefacultativos">Prefacultativos</option>
-                  <option value=" Admicion Especial">Admicion Especial</option>
-                  <option value=" Beca">Beca Municipio</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- MODO EGRE-->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
-                <select class="form-control input-lg" name="editaregreso">
-                  <option value="" id="editaregreso"></option>
-                  <option value=" Examen de Grado">Examen de Grado</option>
-                  <option value=" Trabajo Dirijido">Trabajo Dirijido</option>
-                  <option value=" Proyecto de Grado">Proyecto de Grado</option>
-                  <option value=" Tesis de Grado">Tesis de Grado</option>
-                  <option value=" Exelencia">Exelencia</option>
-                  <option value=" P.E.T.A.E.N.G.">P.E.T.A.E.N.G.</option>
-                  <option value=" Incompleta">Incompleta</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- FECHA DE NACIMIENTO -->
-            <div class="form-group">
-              <h4>FECHA DE NACIMIENTO</h4>
-              <div class="input-group">
-
-                <h4 class="modal-title"> </h4>
-                <span class="input-group-addon"><i class="fa  fa-qq"> </i></span>
-                <input type="date" class=" form-control input-lg" name="editarnacimiento" id="editarnacimiento" data-datepicker-color="primary">
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-        <!-- /.pie del modal-->
-        <div class="modal-footer">
-          <button type="button" class="btn 
+                        <!-- Atentamente-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user-secret"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder=" Atentamente:" name="remitente" id="remitente">
+                            </div>
+                        </div>
+                        <!-- Cargo de quien envia-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder="Cargo del que envia :" name="cargoremitente" id="remitente">
+                            </div>
+                        </div>
+                        <!-- Ci-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-credit-card"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" placeholder="Ci :" name="cic" id="cic">
+                            </div>
+                        </div>
+                        <!-- Correo -->
+                        <div class="form-group">
+                            <label>Correo o direccion</label>
+                            <textarea class=" form-control" rows="3" placeholder="Ing. Correo o direccion" name="correodir" id="correodir" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+                        <input type="hidden" value="<?php echo $_SESSION["cod_user"]; ?>" name="user" id="user">
+                    </div>
+                </div>
+                <!-- /.pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn 
                       btn-outline pull-left" data-dismiss="modal">Salir</button>
-
-          <button type="submit" class="btn btn-outline">Guardar estudiante</button>
-
+                    <button type="submit" class="btn btn-outline">Crear carta</button>
+                </div>
+                <?php
+                $crearcartaext = new Controladorcoresexterna();
+                $crearcartaext->CtrCrearcex();
+                ?>
+            </form>
         </div>
-        <?php
-        $editarmateria = new ControladorEstudiantes();
-        $editarmateria->ctreditarestudiante();
-        ?>
-      </form>
-
     </div>
-  </div>
-
 </div>
 
-<!--   BORRAR MATERIA -->
+
+<!-- CLASE MODAL EDITAR CARTA CREADA EXTERNA -->
+<div class="modal fade bd-example-modal-lg modal-warning" tabindex=" -1" id="modalEditarCrearcarta" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form role="form" method="POST" enctype="multipart/form-data">
+                <!-- cabeza del modal-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Editar Carta</h4>
+                </div>
+                <!-- cuerpo del modal -->
+                <div class="modal-body">
+                    <div class="box-body">
+
+                        <!-- iddecartacreada-->
+                        <input type="hidden" name="codcartac" id="codcartac" value="">
+                        <input type="hidden" name="dniuser" id="dniuser" value="">
+
+                        <!-- HOJA DE RUTA -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class=" fa fa-external-link"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editarrutacreada" id="editarrutacreada">
+                            </div>
+                        </div>
+
+                        <!-- Lugar y fecha-->
+                        <div class="form-group ">
+                            <div class="input-group icono-nosotros ">
+
+                                <span class="input-group-addon"><i class="fa fa-calendar"> </i></span>
+                                <input type="date" class="form-control input-lg" style="color: black" value="" name="editarcrearfecha" id="editarcrearfecha">
+                                <span class="input-group-addon"><i class="fa fa-map-marker"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editarlugar" id="editarlugar">
+
+                            </div>
+                        </div>
+
+                        <!-- dirijida -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class=" fa fa-external-link"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editardirijida" id="editardirijida">
+                            </div>
+                        </div>
+                        <!-- Cargo -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-bank"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editarcargo" id="editarcargo">
+                            </div>
+                        </div>
+                        <!-- Referencia solicitud-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-paper-plane-o"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editarcrearreferencia" id="editarcrearreferencia">
+                            </div>
+                        </div>
+                        <!-- Saludo Inicial-->
+                        <div class="form-group">
+                            <label>Saludo inicial</label>
+                            <textarea class=" form-control" rows="3" value="" name="editarsaludoinicial" id="editarsaludoinicial" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+
+                        <!-- Asunto -->
+                        <div class="form-group">
+                            <label>Asunto</label>
+                            <textarea class=" form-control" rows="3" value="" name="editarasunto" id="editarasunto" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+                        <!-- Despedida-->
+                        <div class="form-group">
+                            <label>Despedida</label>
+                            <textarea class=" form-control" rows="3" value="" name="editardespedida" id="editardespedida" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+
+                        <!-- Atentamente-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user-secret"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editarremitentec" id="editarremitentec">
+                            </div>
+                        </div>
+                        <!-- Cargo de quien envia-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-suitcase"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editarcargoremitente" id="editarcargoremitente">
+                            </div>
+                        </div>
+                        <!-- Ci-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-credit-card"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" value="" name="editarcic" id="editarcic">
+                            </div>
+                        </div>
+                        <!-- Correo -->
+                        <div class="form-group">
+                            <label>Correo o direccion</label>
+                            <textarea class=" form-control" rows="3" value="" name="editarcorreodir" id="editarcorreodir" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+                        <input type="hidden" value="<?php echo $_SESSION["cod_user"]; ?>" name="editaruser" id="editaruser">
+                    </div>
+                </div>
+                <!-- /.pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn 
+                      btn-outline pull-left" data-dismiss="modal">Salir</button>
+                    <button type="submit" class="btn btn-outline">guardar Cambios</button>
+                </div>
+                <?php
+                $editarccartaexterna = new Controladorcoresexterna();
+                $editarccartaexterna->ctreditarcartacreadasex();
+                ?>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php
-$borrarestudiante = new Controladorestudiantes();
-$borrarestudiante->ctrBorrarestudiante();
+$eliminarcartacreadaex = new Controladorcoresexterna();
+$eliminarcartacreadaex->ctrBorrarCartacreadaex();
 ?>
 
 
 
-<!-- CLASE MODAL AGREGAR -->
-<div class="modal modal-info fade" id="Modalagregarrestudiante">
-  <div class="modal-dialog">
+<!-- CLASE MODAL REASIGNAR CARTA-->
+<div class="modal  fade" id="reasignar">
+    <div class="modal-dialog">
 
-    <div class="modal-content">
-      <form role="form" method="POST" enctype="multipart/form-data">
-        <!-- cabeza del modal-->
-        <div class="modal-header">
+        <div class="modal-content bg-light-blue-active">
+            <form role="form" method="POST" enctype="multipart/form-data">
+                <!-- cabeza del modal-->
+                <div class="modal-header">
 
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
-            <span aria-hidden="true">&times;</span></button>
+                        <span aria-hidden="true">&times;</span></button>
 
-          <h4 class="modal-title">Agregar Estudiante a Materia</h4>
+                    <h4 class="modal-title">REASIGNAR CARTA</h4>
+                    
+                </div>
+                <!-- cuerpo del modal -->
+                <div class="modal-body">
+                    <div class="box-body">
+                    <h5 class="centrart"> <b> HORA Y FECHA DE ASIGNACION </b></h5>
+                    <div id="clockdate">
+                                        <div class="clockdate-wrapper">
+                                            <div id="clock"></div>
+                                            <div id="date"></div>
+                                        </div>
+                                    </div>
+                     <br>
+                        
+                        <!-- Remitente Nombre de la carpeta-->
+                        <input type="hidden" name="editarremitentes" id="editarremitentes">
+
+                        <!-- iddecartacreada-->
+                        <input type="hidden" name="codcartaces" id="codcartaces" value="">
+                        <!--dnia del usuario-->
+                        <input type="hidden" name="recepactual" id="recepactual" value="">
+                        
+                        
+                            <!-- HOJA DE RUTA -->
+                            <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class=" fa fa-envelope-square"> </i></span>
+                                <input type="text" class="form-control input-lg" style="color: black" valor="" name="rutahistorial" id="rutahistorial">
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- Receptor Actual-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-archive"> </i></span>
+                                <select class="form-control input-lg" name="editarreceptorhistorial" id="editarreceptorhistorial" style="color: black">
+
+                                    <?php
+
+                                    include("conexionmysqli.php");
+                                    $query = "SELECT * FROM usuarios";
+                                    $resultado = $conexion->query($query);
+                                    while ($row = $resultado->fetch_assoc()) {
+                                    ?>
+                                        <option value="<?php echo $row['cod_user']; ?>" "><?php echo $row['perfil'] . "   " . $row['nombre'] . "   " . $row['ap_paterno'] . "   " . $row['ap_materno'] . "   " . $row['cargo']; ?> </option>
+                                    <?php
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                        	
+                        <!-- Estado Actual de la carta-->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users"> </i></span>
+                                <select class="form-control input-lg" name="editarestadohistorial">
+                                    <option value="" id="editarestadohistorial"></option>
+                                    <option value="Inicial">Inicial</option>
+                                    <option value="Primario">Primario</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Final">Final</option>
+                                    <option value="Terminado">Terminado</option>
+                                    <option value="Desactivado">Desactivado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Observacion actual-->
+                        <div class="form-group">
+                            <label>Observacion</label>
+                            <textarea class=" form-control" rows="3" value="" name="editarobservacionhistorial" id="editarobservacionhistorial" style="margin-top: 0px; margin-bottom: 0px; height: 99px;"></textarea>
+                        </div>
+                        <!-- Subir foto Del Documento -->
+                        <h4 class="modal-title">Subir Foto Del Documento</h4>
+                        <div class="form-group">
+                            <input type="file" class="nuevafotocarta" name="editarfotocartahistorial">
+                            <p class="help-block">Peso maximo de una Foto es de 2MB</p>
+                            <iframe src="vistas/img/usuarios/default/usn.png" class=" previsualizar" width="100%">
+                            </iframe>
+                            <input type="hidden" name="fotoActualcartahistorial" id="fotoActualcartahistorial">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.pie del modal-->
+                <div class="modal-footer">
+                    <button type="button" class="btn 
+                      btn-outline pull-left" data-dismiss="modal">Canselar</button>
+                    <button type="submit" class="btn btn-outline">Reasignar</button>
+                </div>
+                <?php
+                        $asignarex = new Controladorcoresexterna();
+                        $asignarex->ctrassignarex();
+                        ?>
+            </form>
 
         </div>
-        <!-- cuerpo del modal -->
-        <div class="modal-body">
-
-          <div class="box-body">
-
-
-
-          <input type="hidden" id="idest" name ="idest" value="">
-
-            <!-- escojer materia-->
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-archive"> </i></span>
-                <select class="form-control input-lg" id="nuevamateria" name="nuevamateria" style="color: black">
-                  <?php
-
-                  include("conexionmysqli.php");
-                  $query = "SELECT * FROM materia";
-
-                  $resultado = $conexion->query($query);
-
-                  while ($row = $resultado->fetch_assoc()) {
-                  ?>
-                    <option value="<?php echo $row['cod_mat']; ?>"><?php echo $row['cod_mat'] . "   " . $row['nombre_m'] . "   " . $row['gestion'] . "   " . $row['docente']; ?> </option>
-
-                  <?php
-                  } ?>
-                </select>
-              </div>
-            </div>
-            <br>
-            <!-- Notas -->
-            <div class="form-group">
-              <div class="input-group">
-                <p>
-                  <i class="fa fa-commenting-o">
-                    <input type="text" class="input-lg" style="color: black" placeholder="Nota 1" name="nota1" id="nota1" size="14">
-                    <input type="text" class="input-lg" style="color: black" placeholder="Nota 2" name="nota2" id="nota2" size="14">
-                    <input type="text" class="input-lg" style="color: black" placeholder="Nota 3" name="nota3" id="nota3" size="14">
-                  </i>
-                </p>
-              </div>
-            </div>
-
-                      <!-- Nota final  -->
-            <div class="form-group">
-              <p>
-                <i class="fa fa-commenting">
-                  <!-- <input type="text" class="input-lg" style="color: black" placeholder="Nota Final" name="notaf" id="notaf" size="20"> -->
-                  <span class="input-lg" style="color: black" name="notaf" id="notaf" size="20">0</span>
-                  <input type="hidden" id="notafinal" name ="notafinal">
-                </i>  
-              </p>
-
-            </div>
-           
-            <!-- OBSERVACION-->
-
-            <div class="form-group">
-
-              <p>
-                <i class="fa fa-commenting">
-                  <!-- <input type="text" class="input-lg" style="color: black" placeholder="Nota Final" name="notaf" id="notaf" size="20"> -->
-                  <span class="input-lg" style="color: black" name="observacion" id="observacion" size="20"></span>
-                  <input type="hidden" id="observaciones" name = "observaciones" value="">
-                </i>
-              </p>
-
-            </div>
-
-
-          </div>
-        </div>
-        <!-- /.pie del modal-->
-        <div class="modal-footer">
-          <button type="button" class="btn 
-                        btn-outline pull-left" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-outline ">Agregar A la Materia</button>
-        </div>
-        <?php
-        $inscrbir = new ControladorEstudiantes();
-        $inscrbir->CtrInscribir();
-        ?>
-      </form>
-
     </div>
-  </div>
 
 </div>
 
-
-
-    </div>
-    <!-- /.box -->
-
-  </section>
-  <!-- /.content -->

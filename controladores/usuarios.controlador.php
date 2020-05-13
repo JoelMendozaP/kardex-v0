@@ -33,6 +33,7 @@ class ControladorUsuarios{
 						$_SESSION["ap_paterno"] = $respuesta["ap_paterno"];
 						$_SESSION["ap_materno"] = $respuesta["ap_materno"];
 						$_SESSION["perfil"] = $respuesta["perfil"];
+						$_SESSION["dni"] = $respuesta["dni"];
 						
 						 /*=============================================
 						REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN

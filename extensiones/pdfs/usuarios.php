@@ -16,9 +16,9 @@
     </ol>
   </section>
   <!-- Main content -->
-  <section class="content bg-gray-light">
+  <section class="content">
     <!-- Default box -->
-    <div class="box" style="background: skyblue">
+    <div class="box">
       <div class="box-header with-border">
 
         <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAgregarUsuario">
@@ -30,7 +30,7 @@
 
       <div class="box-body">
      
-        <table id="eventos" class="table table-bordered table-striped dt-responsive tablas bg-gray" style="width:100%">
+        <table id="eventos" class="table table-bordered table-striped dt-responsive tablas " style="width:100%">
           <thead>
             <tr>
               <th style="width: 2px">#</th>

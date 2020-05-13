@@ -4,12 +4,7 @@
 
 <?php
 
-
-$miRuta = dirname(__FILE__);
-require($miRuta . '\..\..\extensiones\pdfs\fpdf.php');
-
-
-
+require_once('fpdf.php');
 
 
 
@@ -130,18 +125,23 @@ class PDF extends FPDF
 	{
 		// Posición: a 1,5 cm del final
 
-		$this->SetY(-15);
+		$this->SetY(-25);
 		// Arial italic 8
-		$this->SetFont('Arial', 'I', 8);
 		// Número de página
+		$dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado");
+        $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+
+		$this->SetFont('Arial','',9);
+		$this->Cell(0,0, utf8_decode('A petición del interesado, se expide la presente en la H. ciudad de LA PAZ, A los ' . " " . date('d') . " dias del mes de " . $meses[date('n') - 1] . " de " . date('Y') . "."), 0, 'J');
+		$this->SetY(-15);
+		$this->SetFont('Arial', 'I', 8);
 		$this->Cell(0, 3, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
 	}
 }
 include("conexionmysqli.php");
-if (isset($_GET['id'])) {
-	$id = $_GET['id'];
-	//$reg= $_GET['reg_univ'];
-	//echo $reg;
+if (isset($_GET['idestudiantito'])) {
+	$id = $_GET['idestudiantito'];
+	
 }
 $query = "SELECT * FROM toma t,materia m, estudiante e WHERE $id = t.codest and t.cod_mat = m.cod_mat and e.codest=$id";
 $resultado = $conexion->query($query);
@@ -236,11 +236,6 @@ $pdf->Cell(200, 10, utf8_decode('Promedio General: ') . utf8_decode($total/($co-
 $pdf->Ln(5);
 $pdf->Cell(200, 10, utf8_decode('Promedio Oficial: ') . utf8_decode($total2/($apr)), 0, 0, 'C');
 
-$pdf->Ln(93);
-$dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado");
-$meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-
-$pdf->SetFont('Arial','',9);
-$pdf->MultiCell(200,6, utf8_decode('A petición del interesado, se expide la presente en la H. ciudad de LA PAZ, A los ' . " " . date('d') . " dias del mes de " . $meses[date('n') - 1] . " de " . date('Y') . "."), 0, 'J');
 $pdf->Output();
+
 ?>

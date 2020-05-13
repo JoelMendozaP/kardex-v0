@@ -202,3 +202,30 @@ $("#nota1"&&"#nota2"&&"#nota3").change(function(){
   }
 })
 
+/*=============================================
+GENERAR PDF DE BOLETA
+=============================================*/
+$(".btnboleta").click(function(){
+
+
+	var idestudiantito = $(this).attr("idestudiantito");
+	console.log("este es el codigo",idestudiantito);
+      if(idestudiantito != null){   
+		  generarpdfestudiante(idestudiantito);                                      
+		//window.open("extensiones/pdfs/cartapdf.php?idestudiantito="+idestudiantito);
+	}
+  })
+
+function generarpdfestudiante(idestudiantito){
+ var ancho = 1000;
+ var alto = 800;
+ //calcular posicion x, y para centrar la ventana
+ var x = parseInt((window.screen.width/2)-(ancho/2));
+ var y = parseInt((window.screen.height/2)-(alto/2));
+ window.open("extensiones/pdfs/reporte.php?idestudiantito="+idestudiantito,"CARTA","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+}
+
+
+
+
+

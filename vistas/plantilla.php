@@ -23,6 +23,7 @@ session_start();
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="vistas/bower_components/font-awesome/css/font-awesome.min.css">
 
@@ -35,6 +36,11 @@ session_start();
   
 
   <link rel="stylesheet" href="vistas/dist/css/stilos.css">
+  <link rel="stylesheet" href="vistas/dist/stilosfondo.css">
+<!-- Styles select 2 -->
+
+<link rel="stylesheet" href="vistas/bower_components/select2/dist/css/select2.min.css">
+
 
   
   <!-- AdminLTE Skins -->
@@ -72,6 +78,11 @@ session_start();
 
 <!-- SweetAlert 2 -->
 <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
+<!-- Styles select 2 -->
+<script src="vistas/bower_components/select2/dist/js/select2.min.js"></script>
+
+
+
 
 </head>
 
@@ -79,7 +90,7 @@ session_start();
 CUERPO DOCUMENTO
 ======================================-->
 
-<body class="hold-transition skin-purple sidebar-collapse sidebar-mini login-page">
+<body class="hold-transition  sidebar-collapse sidebar-mini login-page skin-purple"  onload="startTime()">
  
   <?php
 
@@ -101,14 +112,15 @@ CUERPO DOCUMENTO
       if($_GET["ruta"] == "inicio" ||
          $_GET["ruta"] == "usuarios" ||
          $_GET["ruta"] == "materia" ||
-         $_GET["ruta"] == "docentes" ||
          $_GET["ruta"] == "estudiantes" ||
          $_GET["ruta"] == "inscribir" ||
          $_GET["ruta"] == "boleta" ||
-         $_GET["ruta"] == "correspondecia" ||
          $_GET["ruta"] == "corespinterna" ||
          $_GET["ruta"] == "corespexterna" ||
+         $_GET["ruta"] == "cartapdf" ||
          $_GET["ruta"] == "coresphistorial" ||
+         $_GET["ruta"] == "historialcarta" ||
+         $_GET["ruta"] == "historialcartaexterna"||
          $_GET["ruta"] == "salir"){
         include "modulos/".$_GET["ruta"].".php";
       }else{
@@ -126,6 +138,10 @@ CUERPO DOCUMENTO
     include "modulos/login.php";
   }
   ?>
+
+ 
+
+
 
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/usuarios.js"></script>

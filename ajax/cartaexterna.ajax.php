@@ -2,7 +2,7 @@
 require_once "../controladores/corespinterna.controlador.php";
 require_once "../modelos/corespinterna.modelo.php";
 
-class Ajaxcarta{
+class Ajaxcartaexterna{
 	/*=============================================
 	EDITAR  CARTA INTERNA
 	=============================================*/	

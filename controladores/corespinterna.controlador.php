@@ -19,7 +19,10 @@ class Controladorcorespinterna
 
                     if ($_FILES["nuevafotocarta"]["type"] == "application/pdf") {
                         $directorio = "vistas/img/cartas/Interna/" . $_POST["nuevoremitente"];
-                        mkdir($directorio, 0755);
+
+                  if (!file_exists($directorio)) {
+                      mkdir($directorio, 0755);
+                   }
                         /*=============================================
                         GUARDAMOS EL PDF EN EL DIRECTORIO
                         =============================================*/
@@ -33,7 +36,9 @@ class Controladorcorespinterna
                         $nuevoAlto = 500;
                         /* creamos el directorio a guardar la foto del remitente*/
                         $directorio = "vistas/img/cartas/Interna/" . $_POST["nuevoremitente"];
+                        if (!file_exists($directorio)) {
                         mkdir($directorio, 0755);
+                        }
                         /* de acuerdo al tipo de imagen aplicamos las funciones por defecto de php*/
                         if ($_FILES["nuevafotocarta"]["type"] == "image/jpeg") {
 
@@ -77,7 +82,8 @@ class Controladorcorespinterna
 
                 $tabla = "carta";
                 $tabla1 = "recibe";
-
+                $tabla2 = "administrado";
+                
                 $datos = array(
                     "ruta" => $_POST["nuevoruta"],
                     "remitente" => $_POST["nuevoremitente"],
@@ -94,7 +100,7 @@ class Controladorcorespinterna
 
                 $clave2=$_POST["nuevoreceptor"];
 
-                $respuesta = Modelocorespinterna::mdlIngresarcartaint($tabla,$tabla1,$datos,$clave2);
+                $respuesta = Modelocorespinterna::mdlIngresarcartaint($tabla,$tabla1,$datos,$clave2,$tabla2);
 
                 if ($respuesta === "ok") {
                     echo '<script>
@@ -170,6 +176,34 @@ class Controladorcorespinterna
         $respuesta = Modelocorespinterna::MdlMostrarcorespinternas($item, $valor);
         return $respuesta;
     }
+
+
+    
+    /*=============================================
+	MOSTRAR  CARTA HISTORIAL INTERNA
+	=============================================*/
+    static public function ctrMostrarhistorial($item, $valor, $id)
+    {
+        $tabla = "administrado";
+        $tabla1 = "usuarios";
+        $respuesta = Modelocorespinterna::MdlMostrarhistorial($item, $valor,$id,$tabla,$tabla1);
+        return $respuesta;
+    }
+
+    
+ /*=============================================
+	MOSTRAR  CARTA CREADA INTERNA
+	=============================================*/
+    static public function ctrMostrarcartacreada($item, $valor)
+    {
+        $tabla = "crearcarta";
+        $tabla1 = "usuarios";
+        $tabla2 = "crearc";
+        $respuesta = Modelocorespinterna::MdlMostrarcrearcarta($tabla, $tabla1,$tabla2, $item, $valor);
+        return $respuesta;
+    }
+
+
     /*=============================================
 	EDITAR CARTA INTERNA
 	=============================================*/
@@ -197,7 +231,9 @@ class Controladorcorespinterna
                             if (!empty($_POST["fotoActualcarta"])) {
                                      unlink($_POST["fotoActualcarta"]);
                             } else {
-                                mkdir($directorio, 0755);
+                                if (!file_exists($directorio )) {
+                                    mkdir($directorio, 0755);
+                                 }
                             }
                             /*=============================================
                             GUARDAMOS EL PDF EN EL DIRECTORIO
@@ -224,7 +260,9 @@ class Controladorcorespinterna
                     if (!empty($_POST["fotoActualcarta"])) {
                         unlink($_POST["fotoActualcarta"]);
                     } else {
-                        mkdir($directorio, 0755);
+                        if (!file_exists($directorio )) {
+                            mkdir($directorio, 0755);
+                         }
                     }
                     /*=============================================
 					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
@@ -359,7 +397,7 @@ class Controladorcorespinterna
 
             if ($_GET["fotocartas"] != "") {
                 unlink($_GET["fotocartas"]);
-                rmdir('vistas/img/cartas/Interna/' . $_GET["remitente"]);
+                //rmdir('vistas/img/cartas/Interna/' . $_GET["remitente"]);
             }
 
             $respuesta = Modelocorespinterna::mdlBorrarcarta($tabla, $datos);
@@ -386,7 +424,7 @@ class Controladorcorespinterna
     }
 
 /*=============================================
-	Crear carta
+	CREAR CARTA INTERNA
 	=============================================*/
     static public function CtrCrearc()
     {
@@ -396,8 +434,8 @@ class Controladorcorespinterna
                 preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevolugar"]) &&
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["cargo"]) &&
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["remitente"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["cic"])&&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ@. ]+$/', $_POST["correodir"]) 
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["cic"])
+                // preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ@. ]+$/', $_POST["correodir"]) 
             ) {
                 $tabla = "crearcarta";
                 $tabla1 = "crearc";
@@ -415,17 +453,13 @@ class Controladorcorespinterna
                     "cargoemisor" => $_POST["cargoremitente"],
                     "ciemisor" => $_POST["cic"],
                     "otro" => $_POST["correodir"],
+                    "rutacreada" => $_POST["rutacreada"],
+                                
                 );
                 $clave2=$_POST["user"];
-
                 $respuesta = Modelocorespinterna::mdlcrearc($tabla,$tabla1,$datos,$clave2);
 
-                echo "<script>";
-                echo "alert('";
-                echo  $respuesta;
-                echo "')</script>";
-
-                if ($respuesta === "ok") {
+                    if ($respuesta === "ok") {
                     echo '<script>
                                 swal({
                                     type: "success",
@@ -475,6 +509,308 @@ class Controladorcorespinterna
             }
         });
         </script>';
+            }
+        }
+    }
+
+
+
+    
+    /*=============================================
+	EDITAR CARTA CREADA
+	=============================================*/
+    static public function ctreditarcartacreadas()
+    {
+
+        if (isset($_POST["editardirijida"])) {
+                   if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarlugar"]) &&
+                   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarcargo"]) &&
+                   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarremitentec"]) &&
+                   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarcic"])
+                  ) {
+                    $tabla = "crearcarta";
+                    $tabla1 = "crearc";
+                    $datos = array(
+                        "lugar" => $_POST["editarlugar"],
+                        "dirijida" => $_POST["editardirijida"],
+                        "cargodir" => $_POST["editarcargo"],
+                        "referencia" => $_POST["editarcrearreferencia"],
+                        "fechaemicion" => $_POST["editarcrearfecha"],
+                        "saludo" => $_POST["editarsaludoinicial"],
+                        "asunto" => $_POST["editarasunto"],
+                        "despedida" => $_POST["editardespedida"],
+                        "emisor" => $_POST["editarremitentec"],
+                        "cargoemisor" => $_POST["editarcargoremitente"],
+                        "ciemisor" => $_POST["editarcic"],
+                        "otro" => $_POST["editarcorreodir"],
+                        "rutacreada" => $_POST["editarrutacreada"],          
+                    );
+                    
+                    $dnis=$_POST["dniuser"];
+                    $codigocartac=$_POST["codcartac"];
+             $respuesta = Modelocorespinterna::mdleditarcrearc($tabla,$tabla1,$datos,$codigocartac,$dnis);
+    
+                if ($respuesta == "ok") {
+
+                    echo '<script>
+					swal({
+						  type: "success",
+						  title: "El registro de la carta ha sido editado correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar",
+						  closeOnConfirm: false
+						  }).then((result) => {
+									if (result.value) {
+
+									window.location = "corespinterna";
+
+									}
+								})
+
+					</script>';
+                }else {
+                    echo '<script>
+        swal({
+            type: "error",
+            title: "¡El Registro no ha sido Editado correctamente!",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar",
+            closeOnConfirm: false
+
+        }).then((result)=>{
+            if(result.value){
+                window.location = "corespinterna";
+            }
+        });
+        </script>';
+                }
+            } else {
+
+                echo '<script>
+
+					swal({
+						  type: "error",
+						  title: "¡La ruta no puede ir con caracteres especiales como puntos comas y guiones!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar",
+						  closeOnConfirm: false
+						  }).then((result) => {
+							if (result.value) {
+							window.location = "corespinterna";
+							}
+						})
+			  	</script>';
+            }
+        }
+    }
+
+/*=============================================
+BORRAR CARTA CREADA
+=============================================*/
+static public function ctrBorrarCartacreada()
+{
+
+    if (isset($_GET["codcartacreada"])) {
+
+        $tabla = "crearcarta";
+        $datos = $_GET["codcartacreada"];
+
+        $respuesta = Modelocorespinterna::mdlBorrarcartacreada($tabla, $datos);
+        if ($respuesta == "ok") {
+
+            echo '<script>
+
+            swal({
+                  type: "success",
+                  title: "La carta creada ha sido borrado correctamente",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+                            window.location = "corespinterna";
+                            }
+                        })
+            </script>';
+        }
+    }
+}
+
+
+
+
+
+/*=============================================
+	ASIGNAR CARTA 
+	=============================================*/
+    static public function ctrassignar()
+    {
+        
+        if (isset($_POST["rutahistorial"])) {
+                   if (preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarestadohistorial"]) &&
+                    preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarobservacionhistorial"])
+                    ) {
+                   /*=============================================
+				   VALIDAR IMAGEN
+				  =============================================*/
+                   $ruta = $_POST["fotoActualcartahistorial"];
+                   if (isset($_FILES["editarfotocartahistorial"]["tmp_name"]) && !empty($_FILES["editarfotocartahistorial"]["tmp_name"])) {
+                     /*=============================================
+						PREGUNTAMOS SI EL ARCHIVO ES UN PDF 
+						=============================================*/
+                    if ($_FILES["editarfotocartahistorial"]["type"] == "application/pdf") {
+
+                        $directorio = "vistas/img/cartas/Interna/" . $_POST["editarremitentes"];
+
+                            if (!empty($_POST["fotoActualcartahistorial"])) {
+                                     unlink($_POST["fotoActualcartahistorial"]);
+                            } else {
+                                if (!file_exists($directorio)) {
+                                    mkdir($directorio, 0755);
+                                 }
+                            }
+                            /*=============================================
+                            GUARDAMOS EL PDF EN EL DIRECTORIO
+                              =============================================*/
+                                $aleatorio = mt_rand(100, 999999);
+                                $ruta = $directorio . "/" . $aleatorio . ".pdf";
+                                $resultado =@move_uploaded_file($_FILES["editarfotocartahistorial"]["tmp_name"],$ruta);
+                                
+                                           
+                   } else {
+                                    list($ancho, $alto) = getimagesize($_FILES["editarfotocartahistorial"]["tmp_name"]);
+
+                                    $nuevoAncho = 500;
+                                    $nuevoAlto = 500;
+                    /*=============================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					=============================================*/
+                    $directorio = "vistas/img/cartas/Interna/" . $_POST["editarremitentes"];
+
+                    /*=============================================
+					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
+					=============================================*/
+
+                    if (!empty($_POST["fotoActualcartahistorial"])) {
+                        unlink($_POST["fotoActualcartahistorial"]);
+                    } else {
+
+                         if (!file_exists($directorio)) {
+                                    mkdir($directorio, 0755);
+                                 }
+                    }
+                    /*=============================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					=============================================*/
+
+                    if ($_FILES["editarfotocartahistorial"]["type"] == "image/jpeg") {
+                        /*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+                        $aleatorio = mt_rand(100, 999);
+
+                        $ruta = $directorio . "/" . $aleatorio . ".jpg";
+
+                        $origen = imagecreatefromjpeg($_FILES["editarfotocartahistorial"]["tmp_name"]);
+
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                        imagejpeg($destino, $ruta);
+                    }
+
+                    if ($_FILES["editarfotocartahistorial"]["type"] == "image/png") {
+
+                        /*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+                        $aleatorio = mt_rand(100, 999);
+
+                        $ruta = $directorio . "/" . $aleatorio . ".png";
+
+                        $origen = imagecreatefrompng($_FILES["editarfotocartahistorial"]["tmp_name"]);
+
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                        imagepng($destino, $ruta);
+                    }
+                }
+            }
+            
+                $tabla = "administrado";
+                $tabla1 = "carta";
+                $tabla2 = "recibe";
+                $datos = array(
+                    "codhistorialusu" => $_POST["editarreceptorhistorial"],
+                    "cod_carta" => $_POST["codcartaces"],
+                    "estado" => $_POST["editarestadohistorial"],
+                    "observacion" => $_POST["editarobservacionhistorial"],
+                    "rutahistorial" => $_POST["rutahistorial"],
+                );
+                $datos1= array("ruta" => $_POST["rutahistorial"],
+                "estadoproceso" => $_POST["editarestadohistorial"],
+                "observacion" => $_POST["editarobservacionhistorial"],
+                "fotocarta" => $ruta,);
+
+               
+                $codausuario=$_POST["editarreceptorhistorial"];
+                $idcartas=$_POST["codcartaces"];
+                
+                $respuesta =  Modelocorespinterna::mdlasignarcartaint($tabla,$tabla1,$tabla2,$datos,$idcartas,$datos1,$codausuario);
+
+                if ($respuesta == "ok") {
+
+                    echo '<script>
+
+					swal({
+						  type: "success",
+						  title: "La Asignacion se Realizo correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar",
+						  closeOnConfirm: false
+						  }).then((result) => {
+									if (result.value) {
+									window.location = "corespinterna";
+									}
+								})
+					</script>';
+                }else {
+                    echo '<script>
+        swal({
+            type: "error",
+            title: "¡La Asignacion aun no fue Realizada!",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar",
+            closeOnConfirm: false
+
+        }).then((result)=>{
+            if(result.value){
+                window.location = "corespinterna";
+            }
+        });
+        </script>';
+                }
+            } else {
+
+                echo '<script>
+
+					swal({
+						  type: "error",
+						  title: "¡La ruta no puede ir vacío o llevar caracteres especiales como puntos comas y guiones!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar",
+						  closeOnConfirm: false
+						  }).then((result) => {
+							if (result.value) {
+
+							window.location = "corespinterna";
+							}
+						})
+			  	</script>';
             }
         }
     }

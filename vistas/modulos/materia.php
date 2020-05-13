@@ -110,7 +110,7 @@
     <div class="modal-body">
       <div class="box-body">
         
-         <iframe src=<?php echo "http://localhost/sistema/vistas/modulos/listamateria.php?"?> height="1200" width="100%"  ></iframe> 
+         <iframe src=<?php echo "extensiones/pdfs/listamateria.php?"?> height="1200" width="100%"  ></iframe> 
     </div>
     </div>
     <!-- /.pie del modal-->

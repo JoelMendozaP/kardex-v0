@@ -25,6 +25,7 @@
 		height: 55px;
 		display: inline-block;
 		font-family: 'code_boldregular';
+		
 	}
 
 	#sle {
@@ -97,12 +98,6 @@
 			<section> <a id="dia"> </a> / <a id="mes"> </a> /<a id="anio"> </a> </section>
 		</section>
 		
-
-
-
-
-
-
 		<script type="text/javascript">
 			function ActualizarHora() {
 				var fecha = new Date();
@@ -153,15 +148,8 @@
 				elementoanio.textContent = yyyy;
 				elementomes.textContent = mm;
 				elementodia.textContent = dd;
-
-
-
-
 			}
-
 			setInterval(ActualizarHora, 1000);
-
-
 			function addZero(i) {
 				if (i < 10) {
 					i = '0' + i;
@@ -193,9 +181,7 @@
 
 												$nombre = $_SESSION["nombre"] . " - " . $_SESSION["ap_paterno"] . ' - ' . $_SESSION["ap_materno"];
 
-
 												echo   $nombre;
-
 
 												?>
 

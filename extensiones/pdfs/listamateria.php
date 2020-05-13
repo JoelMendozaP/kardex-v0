@@ -1,17 +1,17 @@
 
-
-
-
 <?php
 
 
-$miRuta = dirname(__FILE__);
-require($miRuta . '\..\..\extensiones\pdfs\fpdf.php');
+// $miRuta = dirname(__FILE__);
+// require($miRuta . '\..\..\extensiones\pdfs\fpdf.php');
+
+require_once('fpdf.php');
 
 
-
-
-
+if (isset($_GET['si'])) {
+	$si = $_GET['si'];
+	
+   }
 
 $num = 1;
 class PDF extends FPDF
@@ -130,8 +130,13 @@ class PDF extends FPDF
 	// Pie de página
 	function Footer()
 	{
-		// Posición: a 1,5 cm del final
-
+		
+		$this->SetY(-25);
+		$dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado");
+        $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+		$this->SetFont('Arial','',9);
+		$this->Cell(0,0, utf8_decode('A petición del interesado, se expide la presente en la H. ciudad de LA PAZ, A los ' . " " . date('d') . " dias del mes de " . $meses[date('n') - 1] . " de " . date('Y') . "."), 0, 'J');
+		
 		$this->SetY(-15);
 		// Arial italic 8
 		$this->SetFont('Arial', 'I', 8);
@@ -175,11 +180,5 @@ while ($row = $resultado->fetch_assoc()) {
 }
 
 
-
-$dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado");
-$meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-$pdf->Ln(115);
-$pdf->SetFont('Arial','',8);
-$pdf->MultiCell(170, 6, utf8_decode('A petición del interesado, se expide la presente en la H. ciudad de LA PAZ, A los ' . " " . date('d') . " dias del mes de " . $meses[date('n') - 1] . " de " . date('Y') . "."), 0, 'J');
 $pdf->Output();
 ?>

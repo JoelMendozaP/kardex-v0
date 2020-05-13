@@ -25,12 +25,15 @@
  <section class="content" >
 
 <!-- Default box -->
-<div class="box"  style="background: #C3B1EF">
+<div class="box"  style="background: orange">
   <div class="box-header with-border">
 
-    <div class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalpdf">
-    <i class="fa fa-print">  GENERAR PDF</i> 
-    </div>
+  
+      <?php
+       echo '<button class="btn btn-danger btn-lg btnboleta" idestudiantito="'.$_GET["idestudiantito"].'"> <i class="fa fa-print"> GENERAR BOLETA</i>
+        </button>'?>
+        <br>
+      </div>
     <br>
   </div>
 
@@ -82,16 +85,12 @@
        </fieldset>
        </tr>';
     ?>
-   
-
-      
   </div>
          
 
-
   <div class="box-body">
 
-    <table class="table table-bordered table-striped dt-responsive tablas" style="width:100%">
+    <table class="table table-bordered table-striped dt-responsive tablas" style="width:100%; background:lightcoral; ">
       <thead>
         <tr>
           <th style="width: 1px">#</th>
@@ -152,49 +151,6 @@ foreach ($materia as $key => $value) {
 </section>
 <!-- /.content -->
 </div>
-
-
-
-
-
-<!-- CLASE MODAL GENERAR PDF-->  
-
-<div class="modal fade bd-example-modal-lg  modal-success tabindex="-1" id="modalpdf" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-    <form role="form" method="POST" enctype="multipart/form-data">
-    <!-- cabeza del modal-->
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">GENERAR PDF</h4>
-    </div>
-    <!-- cuerpo del modal -->
-    <div class="modal-body">
-      <div class="box-body">
-        <?php
-     // include("reporte.php");
-        
-        ?>
-         <iframe src=<?php echo "http://localhost/sistema/vistas/modulos/reporte.php?id=".$id?> height="1200" width="100%"  ></iframe> 
-    </div>
-    </div>
-    <!-- /.pie del modal-->
-
-    <div class="modal-footer">
-
-      
-
-      <div type="button" class="btn  btn-outline pull-right" data-dismiss="modal">CANCELAR</div>
-    </div>
-  </form>  
-    </div>
-  </div>
-</div>
-
-
-
-
 
 
 

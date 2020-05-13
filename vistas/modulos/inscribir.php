@@ -23,17 +23,7 @@
 
   <!-- Main content -->
   <section class="content">
-
-    <!-- Default box -->
-    <div class="box" style="background: springgreen">
-      <div class="box-header with-border">
-
-        <div class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalpdf">
-          <i class="fa fa-print"> GENERAR PDF</i>
-        </div>
-        <br>
-      </div>
-      <?php
+  <?php
       if (isset($_GET["idmaterias"])) {
 
 
@@ -56,6 +46,15 @@
       <?php
         }
       } ?>
+    <!-- Default box -->
+    <div class="box" style="background: whitesmoke">
+      <?php
+       echo '<button class="btn btn-danger btn-lg estudiant" codmateria="'.$id.'"> <i class="fa fa-print"> GENERAR PDF</i>
+        </button>'?>
+        <br>
+      </div>
+      
+                                    
 
       <?php
 
@@ -207,7 +206,7 @@
             // include("reporte.php");
 
             ?>
-            <iframe src=<?php echo "http://localhost/sistema/vistas/modulos/reporte.php?id=" . $id ?> height="1200" width="100%"></iframe>
+            <iframe src=<?php echo "http://localhost/sistema/vistas/modulos/reporte.php?id=".$id?> height="1200" width="100%"></iframe>
           </div>
         </div>
         <!-- /.pie del modal-->
