@@ -1,3 +1,3 @@
 <?php
-$conexion = mysqli_connect("127.0.0.1", "joel", "S!=HN5WuwDQE&kv%", "kardex");
+$conexion = mysqli_connect("167.172.159.41", "root", "12345678", "kardex");
 ?>
